@@ -1,0 +1,25 @@
+.common-btn-container {
+    margin-left: 3rem;
+    margin-top: .8rem;
+    color: #fff;
+}
+
+.common-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    border-radius: 2rem;
+    background-color: #272935;
+}
+
+.common-btn-wrapper h4 {
+    color: #e8e6db;
+    font-family: "Montserrat";
+}
+
+.external-link-icon {
+    font-size: 1.2rem;
+    color: #e8e6db;
+    margin-left: .2rem;
+}

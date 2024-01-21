@@ -1,0 +1,66 @@
+.aside-container {
+    width: 4rem;
+    height: 100vh;
+    background-color: #e8e6db;
+    position:  fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.logo-wrapper {
+    color: #000;
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+}
+
+.logo-wrapper .home-icon {
+
+}
+
+.aside-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: .7rem;
+}
+
+.aside-wrapper .icon-wrapper {
+    margin-top: 10rem;
+    margin-left: 1rem;
+}
+
+.aside-wrapper .icon-wrapper .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: #ccc;
+    margin-bottom: 2rem;
+    background: transparent;
+    transition: .3s ease-in-out;
+}
+
+.aside-wrapper .icon-wrapper .icon .my-icon {
+    font-size: 2rem;
+    color: #1d202e;
+}
+
+.aside-wrapper .icon-wrapper .icon .my-icon:hover {
+    color: #fff;
+}
+
+.aside-wrapper .icon-wrapper .icon:hover {
+    background: #e15e62;
+    color: #fff;
+    cursor: pointer;
+
+}
+
+.aside-wrapper .icon-wrapper .icon-menu-lines {
+    margin-top: 22rem;
+    margin-left: 1rem;
+}

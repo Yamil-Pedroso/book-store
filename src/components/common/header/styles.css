@@ -1,0 +1,21 @@
+.comment-header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .subtitle-wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 3rem;
+  }
+
+.vertical-line {
+    width: .2rem;
+    height: 7rem;
+    background: #2a2128;
+ }
+
+ .comment-header p {
+   width: 30rem;
+   text-align: left;
+ }

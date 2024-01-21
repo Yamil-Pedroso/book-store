@@ -1,0 +1,46 @@
+.book-series-coll-container {
+
+}
+
+.book-series-coll-wrapper {
+   display: flex;
+   flex-direction: column;
+   margin-top: 1rem;
+}
+
+.book-series-coll-wrapper h4 {
+    color: #000;
+    margin-left: 3rem;
+    font-family: Merryweather;
+    font-size: 2rem;
+    margin-bottom: .2rem;
+}
+
+.book-content-coll-wrapper {
+  display: flex;
+}
+
+.book-content-coll-left {
+    display: flex;
+    align-items: center;
+}
+
+.book-content-coll-right {
+    margin-left: 30rem;
+    margin-top: 1rem;
+}
+
+.book-content-coll-wrapper p:nth-child(1) {
+    margin-left: 1.3rem;
+    font-weight: bold;
+}
+
+.book-content-coll-wrapper p:nth-child(2) {
+    margin-left: 1.3rem;
+    font-size: 1.2rem;
+}
+
+.book-content-coll-wrapper img {
+    width: 10rem;
+    margin-left: 3rem;
+}

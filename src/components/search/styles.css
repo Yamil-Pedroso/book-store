@@ -1,0 +1,23 @@
+.search-container {
+    margin: 2rem 8rem;
+}
+
+.search-input {
+    width: 15rem;
+    height: 2rem;
+    background: transparent;
+    outline: none;
+    border: none;
+    margin-left: .1rem;
+    color: #1d202e;
+}
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.search-icon {
+    font-size: 1.5rem;
+    color: #1d202e;
+}

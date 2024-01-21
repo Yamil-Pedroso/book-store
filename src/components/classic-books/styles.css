@@ -1,0 +1,79 @@
+.classic-book-container {
+  h1 {
+    color: #21201e;
+    font-family: "Merryweather";
+    margin-left: 3rem;
+  }
+}
+
+.card-content {
+    width: 80rem;
+    display: flex;
+    flex-wrap: wrap;
+    transition: 1s ease;
+}
+
+.literature-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 12rem;
+    height: 15rem;
+    margin: 1rem 3rem;
+    color: #000;
+    transition: 0.5s ease;
+  }
+
+  .btn-classic-books {
+    width: 14%;
+  }
+
+  .literature-wrapper:hover {
+    background: #fff;
+    transform: scale(1.5);
+    animation: moveUp;
+    cursor: pointer;
+  }
+
+  .red {
+    background: red;
+  }
+
+  .blue {
+    background: blue;
+  }
+
+  .literature-wrapper {
+    overflow: hidden;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  }
+
+  .literature-wrapper:hover {
+    box-shadow: 10px 10px 14px 10px rgba(0,0,0,0.20);
+  }
+
+  .literature-wrapper .card-wrapper img {
+    width: 12.5rem;
+    height: 18rem;
+    object-fit: cover;
+  }
+
+  .book-content-wrapper {
+    margin-top: 5rem;
+  }
+
+  .book-content-wrapper p {
+    margin-left: 3rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-family: Merryweather;
+  }
+
+  @keyframes moveUp {
+    from {
+      transform: translateY(-2rem);
+    }
+    to {
+       transition: 2s ease;
+    }
+  }

@@ -1,0 +1,45 @@
+.r-container {
+   background-color: #fdfcf7;
+   padding: 2rem;
+}
+
+.r-container p, .r-container .header-text {
+    color: #21201e;
+}
+
+.user-info-wrapper {
+    display: flex;
+    align-items: center;
+    color: #000;
+    margin-right: 2rem;
+}
+
+.notis-icon {
+    font-size: 1.5rem;
+    color: #2a2a2a;
+    margin-left: .5rem;
+}
+
+.user-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.user-wrapper .header-text {
+    margin-left: 1rem;
+    font-weight: bold;
+}
+
+.user-wrapper .user-info {
+    width: 3.8rem;
+    height: 3.8rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.user-wrapper .user-info .user-avatar {
+    width: 3.8rem;
+    height: 3.8rem;
+    object-fit: cover;
+}

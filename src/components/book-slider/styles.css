@@ -1,0 +1,18 @@
+.book-slider-container {
+  margin-left: 3rem;
+  padding: 0 3rem;
+}
+
+.book-slider-wrapper h1 {
+    color: #21201e;
+    font-family: Merryweather;
+    margin-left: 3rem;
+}
+
+.book-slider-wrapper p {
+    color: #21201e;
+}
+
+.btn-book-slider {
+ width: 10%;
+}

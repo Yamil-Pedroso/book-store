@@ -1,0 +1,159 @@
+.book-slider-coll-container {
+    margin: 6rem 6rem;
+    position: relative;
+  }
+
+  .profil-account-wrapper {
+    position: absolute;
+    right: -5rem;
+    top: -25rem;
+  }
+
+  .color-name {
+    color: #e8e6db;
+  }
+
+  .right-box {
+    width: 50rem;
+    height: 90rem;
+    background: #252526;
+    position: absolute;
+    top: -28rem;
+    right: -10rem;
+    z-index: -1;
+}
+
+.book-slider-coll-wrapper {
+  display: flex;
+
+  div {
+    margin: 0 1rem;
+  }
+}
+
+.author-book-wrapper {
+  display: flex;
+  padding: 1.5rem;
+  position: absolute;
+  right: 5rem;
+  top: -20rem;
+  z-index: 1;
+}
+
+.author-name-wrapper .author-name {
+  width: 10rem;
+}
+
+.img-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.author-book {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-book-wrapper .author-book p {
+  margin: 0 1rem;
+}
+
+.author-book .author-book-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.author-book .desc-book-wrapper p {
+ width: 28rem;
+ margin-top: 1rem;
+ margin-left: 12rem;
+}
+
+.book-title-wrapper .book-title {
+    font-size: 1.5rem;
+}
+
+.book-title-wrapper p {
+    color: #e8e6db;
+    font-family: "Merryweather";
+}
+
+ .book-slider-content {
+    display: flex;
+    width: 10rem;
+    height: 18rem;
+    overflow: hidden;
+    box-shadow: -10px 10px 5px 0px rgba(0,0,0,0.75);
+    transition: 0.5s ease;
+    background: #21201e;
+    animation: imgAppears .5s ease;
+}
+
+.book-slider-content:hover {
+   width: 26rem;
+   transform: scale(1);
+   box-shadow: -10px 10px 5px 0px rgba(0,0,0,0.75);
+   transition: 0.7s ease;
+   cursor: pointer;
+
+}
+
+.book-slider-content img {
+    width: 14rem;
+    height: 18.5rem;
+    object-fit: cover;
+}
+
+.counter-books-new-coll-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.5rem;
+}
+
+ .new-coll-wrapper p {
+  width: 30rem;
+  color: #252526;
+  font-size: 1.1rem;
+}
+
+.new-coll-wrapper p a {
+  color: red;
+}
+
+.books-counter p {
+  color: #e8e6db;
+  font-size: 1.3rem;
+}
+
+@keyframes imgAppears {
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
+}
+
+.test-box {
+  width: 5rem;
+  height: 5rem;
+  background: #000;
+  cursor: pointer;
+}
+
+.author-name.active, .book-title.active {
+  color: #e8e6db;
+}
