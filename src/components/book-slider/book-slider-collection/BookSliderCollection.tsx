@@ -19,9 +19,7 @@ const BookSliderCollection = () => {
   >(bookSliderData)
   const [textActive, setTextActive] = useState(false)
   const [hoveredBookIndex, setHoveredBookIndex] = useState<number | null>(null)
-  const bookIndex0 = bookSliderData[0]
-
-  console.log(bookIndex0)
+  const [stopFirstBookMovement, setStopFirstBookMovement] = useState(false)
 
   const handleMouseOver = (index: number) => {
     setHoveredBookIndex(index)
@@ -37,8 +35,22 @@ const BookSliderCollection = () => {
     setBookSliderCollData
   }, [bookSliderCollData])
 
+  useEffect(() => {
+    if (hoveredBookIndex !== null && hoveredBookIndex !== 0) {
+      setTextActive(true)
+    } else {
+      setTextActive(false)
+    }
+
+    if (hoveredBookIndex === 0) {
+      setStopFirstBookMovement(true)
+    } else {
+      setStopFirstBookMovement(false)
+    }
+  }, [hoveredBookIndex])
+
   const marqueeProps = {
-    velocity: hoveredBookIndex ? 0 : 25,
+    velocity: stopFirstBookMovement || hoveredBookIndex ? 0 : 25,
     direction: 'ltr' as const,
     scatterRandomly: false,
     resetAfterTries: 100,
@@ -46,6 +58,8 @@ const BookSliderCollection = () => {
       console.log('Marquee initialized')
     },
     onFinish: () => {
+      setHoveredBookIndex(null)
+      setTextActive(false)
       console.log('Marquee finished')
     },
   }
