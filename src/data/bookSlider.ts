@@ -15,7 +15,7 @@ export const bookSliderData = [
         id: 2,
         title: "The art of Wish",
         author: "Erin Falligant",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        desc: "Young Asha makes a wish so powerful that it's answered by a cosmic force, a little ball of boundless energy called Star. With Star's help, Asha must save her kingdom from King Magnifico and prove that when the will of one courageous human connects with the magic of the stars, wondrous things can happen.",
         img: bookSliderTwo,
         authorAvatar: authorTwo
     },

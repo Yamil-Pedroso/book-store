@@ -94,18 +94,25 @@ const BookSliderCollection = () => {
           textActive &&
           hoveredBookIndex !== null && (
             <div className="author-book">
-              <div className="img-wrapper">
-                <img
-                  src={bookSliderCollData[hoveredBookIndex].authorAvatar}
-                  alt="book-slider-img"
-                  width="100"
-                />
+              <div className="author-book-img">
+                <div className="img-wrapper">
+                  <img
+                    src={bookSliderCollData[hoveredBookIndex].authorAvatar}
+                    alt="book-slider-img"
+                    width="100"
+                  />
+                </div>
+                <div className="author-name-wrapper">
+                  <p className="author-name">
+                    {bookSliderCollData[hoveredBookIndex].author}
+                  </p>
+                  <p>Author</p>
+                </div>
               </div>
-              <div className="author-name-wrapper">
+              <div className="desc-book-wrapper">
                 <p className="author-name">
-                  {bookSliderCollData[hoveredBookIndex].author}
+                  {bookSliderCollData[hoveredBookIndex].desc}
                 </p>
-                <p>Author</p>
               </div>
             </div>
           )
