@@ -22,7 +22,7 @@ export const books = [
         title: "1984",
         author: "George Orwell",
         img: bookThree,
-        qt: 10,
+        qt: 11,
         active: true
     },
     {
