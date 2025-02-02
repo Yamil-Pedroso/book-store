@@ -1,12 +1,12 @@
 .comment-header {
     display: flex;
     flex-direction: column;
+    padding: 0 1rem;
+    margin: -2rem 0 0 0;
   }
 
   .subtitle-wrapper {
     display: flex;
-    align-items: center;
-    margin-left: 3rem;
   }
 
 .vertical-line {

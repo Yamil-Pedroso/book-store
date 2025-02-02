@@ -1,6 +1,11 @@
 .r-container {
    background-color: #fdfcf7;
    padding: 2rem;
+   max-width: 14rem;
+   position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
 }
 
 .r-container p, .r-container .header-text {

@@ -1,5 +1,4 @@
 .word-place-container {
     display: flex;
-    justify-content: center;
-    padding: 0rem 5rem;
+    justify-content: space-between;
 }
