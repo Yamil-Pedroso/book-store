@@ -5,6 +5,7 @@ import "./styles.css";
 import { books } from "../../data/books";
 import LiteratureWorldHeader from "../common/header/LiteratureWorldHeader";
 import { IoMdCloudDownload } from "react-icons/io";
+import { highQualityCovers } from "../../data/highQualityCovers";
 
 // Books from the API
 import { fetchBooks } from "../../services/BooksService";
@@ -26,6 +27,10 @@ const ClassicBooks = () => {
   const [myBooks, setMyBooks] = useState<BookProps[]>(books);
   const [apiBooks, setApiBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+
+  const getBookCover = (book: Book) => {
+    return highQualityCovers[book.id] || book.formats["image/jpeg"];
+  };
 
   useEffect(() => {
     setMyBooks;
@@ -106,13 +111,16 @@ const ClassicBooks = () => {
               <div key={book.id} className="api-book-card">
                 <div className="book-img-wrapper">
                   {book.formats["image/jpeg"] && (
-                    <img src={book.formats["image/jpeg"]} alt={book.title} />
+                    <img src={getBookCover(book)} alt={book.title} />
                   )}
                 </div>
                 <h3>{book.title}</h3>
                 <p className="author">
                   {book.authors.map((author) => author.name).join(", ")}
                 </p>
+                <span>
+                  {book.id}
+                </span>
                 <div className="downloads-wrapper">
                   <IoMdCloudDownload />
                   <p className="downloads">{book.download_count} downloads</p>

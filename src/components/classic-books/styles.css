@@ -86,7 +86,7 @@
 /* GRID para los libros (4 por fila) */
 .api-books-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 4rem;
   justify-items: center;
   padding: 1rem;
@@ -204,4 +204,3 @@
     opacity: 0.1;
   }
 }
-
