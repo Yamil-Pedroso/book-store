@@ -5,6 +5,7 @@ import Search from './components/search/Search'
 import HomePage from './pages/HomePage'
 import BookSliderPage from './pages/BookSliderPage'
 import ReadingBookPage from './pages/ReadingBookPage'
+import LiveClockPage from './pages/LiveClockPage'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/book-slider" element={<BookSliderPage />} />
           <Route path="/reading-books" element={<ReadingBookPage />} />
+          <Route path="/live-clock" element={<LiveClockPage />} />
         </Routes>
       </Router>
     </div>
