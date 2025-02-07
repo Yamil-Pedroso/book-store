@@ -14,7 +14,7 @@ export const BookListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
- 
+
 `;
 
 export const BookList = styled.div`
@@ -37,10 +37,10 @@ export const DropZoneWrapper = styled.div`
 
 export const DropZone = styled.div<IBookReadProps>`
   width: 300px;
-  min-height: 12rem; 
-  max-height: 600px; 
-  height: auto; 
-  overflow-y: ${(props) => (props.isHeightToHigh >= 600 ? "auto" : "visible")}; 
+  min-height: 12rem;
+  max-height: 600px;
+  height: auto;
+  overflow-y: ${(props) => (props.isHeightToHigh >= 600 ? "auto" : "visible")};
   overflow-x: hidden;
   background-color: #272935;
   display: flex;
@@ -52,6 +52,27 @@ export const DropZone = styled.div<IBookReadProps>`
   margin-right: 1rem;
   gap: 10px;
   background: linear-gradient(135deg, #272935, #31314c);
+  position: relative;
+
+  .num-book-read {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: #ff4d4d;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+
+    span {
+      font-weight: bold;
+      font-size: 1rem;
+      color: #ffffff;
+    }
+  }
 
 
   .book {
@@ -102,7 +123,7 @@ export const DirArrowWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 5rem;
-  margin-top: 20px; 
+  margin-top: 20px;
   width: 100%;
   position: absolute;
   top: 45rem;
@@ -126,25 +147,25 @@ export const DirArrowWrapper = styled.div`
   .a-back::before {
     content: "";
     position: absolute;
-    left: -20px; 
+    left: -20px;
 
     width: 0;
     height: 0;
     border-top: 15px solid transparent;
     border-bottom: 15px solid transparent;
-    border-right: 20px solid #2b2c3c; 
+    border-right: 20px solid #2b2c3c;
   }
 
   .a-next::after {
     content: "";
     position: absolute;
-    right: -20px; 
+    right: -20px;
     top: 50%;
     transform: translateY(-50%);
     width: 0;
     height: 0;
     border-top: 15px solid transparent;
     border-bottom: 15px solid transparent;
-    border-left: 20px solid #2b2c3c; 
+    border-left: 20px solid #2b2c3c;
   }
 `;

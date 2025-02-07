@@ -49,51 +49,51 @@ const initialBooks: Book[] = [
   },
   {
     id: 5,
-    title: "Hola Mundo",
+    title: "The perfume",
     cover:
-      "https://www.pagesofhackney.co.uk/wp-content/uploads/2023/03/710iAkPYPzL.jpg",
+      "https://i0.wp.com/theblacknarcissus.com/wp-content/uploads/2022/12/bcecb015-e3f9-44f1-8231-6986740f5dd2_rw_600.jpg?ssl=1",
     startTime: Date.now() - 9000000, // 2.5 horas de lectura
   },
   {
     id: 6,
-    title: "Mejor impossible",
+    title: "One Hundred Years of Solitude",
     cover:
-      "https://www.pagesofhackney.co.uk/wp-content/uploads/2023/03/710iAkPYPzL.jpg",
+      "https://s26162.pcdn.co/wp-content/uploads/2018/02/100_Years_First_Ed_Hi_Res-768x1153.jpg",
     startTime: Date.now() - 9000000, // 2.5 horas de lectura
   },
   {
     id: 7,
-    title: "Harry Potter",
+    title: "To kill a Mockingbird",
     cover:
-      "https://www.pagesofhackney.co.uk/wp-content/uploads/2023/03/710iAkPYPzL.jpg",
+      "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/271fced1-654e-4341-8ece-aacafd04eff5/dbms9xp-ce9a87df-a12d-408e-93f5-15a3e236443c.jpg/v1/fill/w_730,h_1095,q_70,strp/to_kill_a_mockingbird_____book_cover_by_darkknight1986_dbms9xp-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTUzNiIsInBhdGgiOiJcL2ZcLzI3MWZjZWQxLTY1NGUtNDM0MS04ZWNlLWFhY2FmZDA0ZWZmNVwvZGJtczl4cC1jZTlhODdkZi1hMTJkLTQwOGUtOTNmNS0xNWEzZTIzNjQ0M2MuanBnIiwid2lkdGgiOiI8PTEwMjQifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.Q_SZyZIyDoeNGpvO12wI7ezZE41fYNjY9bv7D7XUHvk",
     startTime: Date.now() - 9000000, // 2.5 horas de lectura
   },
   {
     id: 8,
-    title: "The Perfect Storm",
+    title: "Neuromancer",
     cover:
-      "https://www.pagesofhackney.co.uk/wp-content/uploads/2023/03/710iAkPYPzL.jpg",
+      "https://i.etsystatic.com/43710319/r/il/8bd395/6194784821/il_fullxfull.6194784821_2n6f.jpg",
     startTime: Date.now() - 9000000, // 2.5 horas de lectura
   },
   {
     id: 9,
-    title: "The Perfume",
+    title: "A Brief History of Time",
     cover:
-      "https://www.pagesofhackney.co.uk/wp-content/uploads/2023/03/710iAkPYPzL.jpg",
+      "https://lh5.googleusercontent.com/proxy/wbFzRuApOR4Oh-O6y8IKYxmRddsZfhuFeiLU_evkyRp54omh-_30-0bV0eDQer6mqNud59AANNuxhCpIEgb7SheOi2LDHHlEaXieicAJKWDEKiiVRw",
     startTime: Date.now() - 9000000, // 2.5 horas de lectura
   },
   {
     id: 10,
-    title: "David Copperfield",
+    title: "The girl with the dragon tattoo",
     cover:
-      "https://www.pagesofhackney.co.uk/wp-content/uploads/2023/03/710iAkPYPzL.jpg",
+      "https://sdi4.chrislands.com/sdi/978/03/07/9/9780307949493.jpg",
     startTime: Date.now() - 9000000, // 2.5 horas de lectura
   },
   {
     id: 11,
-    title: "Shadow of the Wind",
+    title: "Pinocchio",
     cover:
-      "https://www.pagesofhackney.co.uk/wp-content/uploads/2023/03/710iAkPYPzL.jpg",
+      "https://preview.redd.it/how-accurate-was-lies-of-p-to-the-original-the-adventures-v0-7wx4482vuf0d1.jpg?width=640&crop=smart&auto=webp&s=2a4c74264dca60d873cfd865e6951a792a460bec",
     startTime: Date.now() - 9000000, // 2.5 horas de lectura
   },
 ];
@@ -266,6 +266,11 @@ const LiveClock = () => {
             onDrop={handleDrop}
             onDragOver={allowDrop}
           >
+            <div className="num-book-read">
+                <span>
+                  {readBooks.length}
+                </span>
+            </div>
             {readBooks.length > 0 ? (
               readBooks.map((book) => (
                 <motion.div
