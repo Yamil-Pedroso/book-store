@@ -183,14 +183,23 @@ const BookSliderCollection = () => {
              />
             <p
               style={{ 
+                display: "flex",
+                flexDirection: "column",
                 marginLeft: ".3rem",
                 fontSize: "0.8rem",
                 textAlign: "center",
                 fontWeight: "bold",
-                color: "#f27373"
+                color: "#cbc9c9"
       
               }}
-            >Harry Potter collection</p>
+            ><span
+              style={{ 
+                color: "#f27373",
+                fontSize: "1rem",
+                fontWeight: "bold",
+                marginRight: ".3rem"
+              }}
+            >NEW!</span>Harry Potter collection!</p>
           </motion.div>
         </div>
         <div className="books-counter">
