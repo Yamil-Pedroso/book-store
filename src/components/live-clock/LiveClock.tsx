@@ -1,9 +1,16 @@
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
-import styled from "styled-components";
+import { useState, useEffect, useMemo } from "react";
 import { FaBookReader } from "react-icons/fa";
+import {
+  Container,
+  BookListWrapper,
+  BookList,
+  DropZoneWrapper,
+  DropZone,
+  ResetButton,
+  DirArrowWrapper,
+} from "./styles";
 
-// Define un tipo para los libros
 interface Book {
   id: number;
   title: string;
@@ -11,7 +18,6 @@ interface Book {
   startTime: number;
 }
 
-// Lista inicial de libros
 const initialBooks: Book[] = [
   {
     id: 1,
@@ -41,89 +47,56 @@ const initialBooks: Book[] = [
       "https://www.pagesofhackney.co.uk/wp-content/uploads/2023/03/710iAkPYPzL.jpg",
     startTime: Date.now() - 9000000, // 2.5 horas de lectura
   },
+  {
+    id: 5,
+    title: "Hola Mundo",
+    cover:
+      "https://www.pagesofhackney.co.uk/wp-content/uploads/2023/03/710iAkPYPzL.jpg",
+    startTime: Date.now() - 9000000, // 2.5 horas de lectura
+  },
+  {
+    id: 6,
+    title: "Mejor impossible",
+    cover:
+      "https://www.pagesofhackney.co.uk/wp-content/uploads/2023/03/710iAkPYPzL.jpg",
+    startTime: Date.now() - 9000000, // 2.5 horas de lectura
+  },
+  {
+    id: 7,
+    title: "Harry Potter",
+    cover:
+      "https://www.pagesofhackney.co.uk/wp-content/uploads/2023/03/710iAkPYPzL.jpg",
+    startTime: Date.now() - 9000000, // 2.5 horas de lectura
+  },
+  {
+    id: 8,
+    title: "The Perfect Storm",
+    cover:
+      "https://www.pagesofhackney.co.uk/wp-content/uploads/2023/03/710iAkPYPzL.jpg",
+    startTime: Date.now() - 9000000, // 2.5 horas de lectura
+  },
+  {
+    id: 9,
+    title: "The Perfume",
+    cover:
+      "https://www.pagesofhackney.co.uk/wp-content/uploads/2023/03/710iAkPYPzL.jpg",
+    startTime: Date.now() - 9000000, // 2.5 horas de lectura
+  },
+  {
+    id: 10,
+    title: "David Copperfield",
+    cover:
+      "https://www.pagesofhackney.co.uk/wp-content/uploads/2023/03/710iAkPYPzL.jpg",
+    startTime: Date.now() - 9000000, // 2.5 horas de lectura
+  },
+  {
+    id: 11,
+    title: "Shadow of the Wind",
+    cover:
+      "https://www.pagesofhackney.co.uk/wp-content/uploads/2023/03/710iAkPYPzL.jpg",
+    startTime: Date.now() - 9000000, // 2.5 horas de lectura
+  },
 ];
-
-const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const BookList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: 20rem;
-  width: 100%;
-  gap: 20px;
-  text-align: center;
-`;
-
-const DropZoneWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  p {
-    font-size: 2rem;
-    color: #272935;
-  }
-`;
-
-const DropZone = styled.div`
-  width: 300px;
-  height: auto;
-  background-color: #272935;
-  display: flex;
-  flex-direction: column;
-  font-size: 1.5rem;
-  color: #555;
-  padding: 2rem;
-  border-radius: 10px;
-  margin-right: 1rem;
-  gap: 10px;
-  background: linear-gradient(135deg, #272935, #31314c);
-
-
-  .book {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    height: 7.5rem;
-    background-color: #1c1c1d;
-    border-radius: 5px;
-
-    border: 1px solid #653636;
-
-    p {
-      font-size: 1rem;
-      color: #fff;
-      margin-right: 10px;
-      margin-top: 5rem;
-    }
-
-    .book-cover {
-      width: 7rem;
-      height: auto;
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-  }
-`;
-
-const ResetButton = styled.button`
-  margin-top: 10px;
-  padding: 8px 12px;
-  background-color: #ff4d4d;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  &:hover {
-    background-color: #cc0000;
-  }
-`;
 
 const LiveClock = () => {
   const [books, setBooks] = useState<Book[]>(() => {
@@ -135,6 +108,8 @@ const LiveClock = () => {
     const savedReadBooks = localStorage.getItem("readBooks");
     return savedReadBooks ? JSON.parse(savedReadBooks) : [];
   });
+
+  const [index, setIndex] = useState<number>(0);
 
   useEffect(() => {
     localStorage.setItem("books", JSON.stringify(books));
@@ -177,91 +152,162 @@ const LiveClock = () => {
     localStorage.removeItem("readBooks");
   };
 
+  const limit = 3;
+
+  const handleNext = () => {
+    setIndex((prevIndex) => {
+      if (prevIndex + limit < books.length) {
+        return prevIndex + limit;
+      }
+      return prevIndex;
+    });
+  };
+
+  const handleBack = () => {
+    setIndex((prevIndex) => {
+      if (prevIndex - limit >= 0) {
+        return prevIndex - limit;
+      }
+      return 0;
+    });
+  };
+
   return (
-    <Container>
-      <BookList>
-        {books.map((book) => (
-          <div key={book.id} style={{ maxWidth: "20rem", overflow: "hidden" }}>
-            <div
-              style={{
-                width: "100%",
-                height: "450px",
-                overflow: "hidden",
-                borderRadius: "10px",
-                boxShadow: "10px 10px 25px 19px rgba(0,0,0,0.4)",
-                marginBottom: "10px",
+    <>
+      <Container>
+        <BookListWrapper>
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+          >
+            <BookList>
+              {books.slice(index, index + limit).map((book) => (
+                <motion.div
+                  key={book.id}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  style={{ maxWidth: "20rem", overflow: "hidden" }}
+                >
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "450px",
+                      overflow: "hidden",
+                      borderRadius: "10px",
+                      boxShadow: "10px 10px 25px 19px rgba(0,0,0,0.4)",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    <img
+                      src={book.cover}
+                      alt={book.title}
+                      style={{
+                        width: "100%",
+                        borderRadius: "10px",
+                        boxShadow: "0px 4px 8px rgba(0,0,0,0.2)",
+                        cursor: "grab",
+                        objectFit: "cover",
+                      }}
+                      draggable
+                      onDragStart={(event) => handleDragStart(event, book.id)}
+                    />
+                  </div>
+                  <h3
+                    style={{
+                      fontSize: "1.8rem",
+                      margin: "10px 0",
+                      color: "#2a2a2a",
+                    }}
+                  >
+                    {book.title}
+                  </h3>
+                  <p style={{ fontSize: "1.5rem", color: "#555" }}>
+                    Time Read:{" "}
+                    <span
+                      style={{
+                        color: "#d77575",
+                        fontWeight: "bold",
+                        fontSize: "1.2rem",
+                      }}
+                    >
+                      {getTimeElapsed(book.startTime)}
+                    </span>
+                  </p>
+                </motion.div>
+              ))}
+            </BookList>
+          </motion.div>
+        </BookListWrapper>
+        <DirArrowWrapper>
+          <button
+            disabled={index === 0}
+            className="a-back"
+            onClick={handleBack}
+          >
+            Back
+          </button>
+          <button
+            disabled={index + limit >= books.length}
+            className="a-next"
+            onClick={handleNext}
+          >
+            Next
+          </button>
+        </DirArrowWrapper>
 
-              }}
-            >
-            <img
-              src={book.cover}
-              alt={book.title}
-              style={{
-                width: "100%",
-                borderRadius: "10px",
-                boxShadow: "0px 4px 8px rgba(0,0,0,0.2)",
-                cursor: "grab",
-                objectFit: "cover",
-
-              }}
-              draggable
-              onDragStart={(event) => handleDragStart(event, book.id)}
-            />
-
-            </div>
-            <h3
-              style={{ fontSize: "2rem", margin: "10px 0", color: "#2a2a2a" }}
-            >
-              {book.title}
-            </h3>
-            <p style={{ fontSize: "1.5rem", color: "#555" }}>
-              Time Read:{" "}
-              <span
+        <DropZoneWrapper>
+          <DropZone
+            isHeightToHigh={window.innerWidth}
+            onDrop={handleDrop}
+            onDragOver={allowDrop}
+          >
+            {readBooks.length > 0 ? (
+              readBooks.map((book) => (
+                <motion.div
+                  key={book.id}
+                  className="book"
+                  initial={{ y: -50, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ type: "spring", stiffness: 150, damping: 15 }}
+                >
+                  <div className="book-cover">
+                    <img src={book.cover} alt={book.title} />
+                  </div>
+                  <p>{book.title}</p>
+                </motion.div>
+              ))
+            ) : (
+              <motion.p
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 50 }}
+                transition={{ duration: 0.5 }}
                 style={{
                   color: "#d77575",
-                  fontWeight: "bold",
                   fontSize: "1.5rem",
+                  textAlign: "center",
                 }}
               >
-                {getTimeElapsed(book.startTime)}
-              </span>
-            </p>
-          </div>
-        ))}
-      </BookList>
-      <DropZoneWrapper>
-        <DropZone onDrop={handleDrop} onDragOver={allowDrop}>
-          {readBooks.length > 0 ? (
-            readBooks.map((book) => (
-              <motion.div
-                key={book.id}
-                className="book"
-                initial={{ y: -50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ type: "spring", stiffness: 150, damping: 15 }}
-              >
-                <div className="book-cover">
-                  <img src={book.cover} alt={book.title} />
-                </div>
-                <p>{book.title}</p>
-              </motion.div>
-            ))
-          ) : (
-            <motion.p
-            initial={{ opacity: 0 , x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 50 }}
-            transition={{ duration: 0.5 }}
-            style={{ color: "#d77575", fontSize: "1.5rem", textAlign: "center" }}
-          >
-            No tienes libros leídos <FaBookReader style={{ fontSize: "2rem", marginLeft: ".5rem", color: "#fff" }} />
-          </motion.p>
-          )}
-        <ResetButton onClick={resetBooks}>Reset Books</ResetButton>
-        </DropZone>
-
-      </DropZoneWrapper>
-    </Container>
+                No tienes libros leídos{" "}
+                <FaBookReader
+                  style={{
+                    fontSize: "2rem",
+                    marginLeft: ".5rem",
+                    color: "#fff",
+                  }}
+                />
+              </motion.p>
+            )}
+            <ResetButton onClick={resetBooks}>Reset Books</ResetButton>
+          </DropZone>
+        </DropZoneWrapper>
+      </Container>
+    </>
   );
 };
 
