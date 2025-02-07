@@ -170,7 +170,7 @@ const BookSliderCollection = () => {
               width: "200px",
               color: "#1a1a1a", 
               padding: "1rem", 
-              background: "#fff", 
+              background: "#252526", 
               boxShadow: "3px 3px 30px 1px rgba(56, 87, 138, 0.3)", 
               visibility: hover ? "visible" : "hidden",
               position: "absolute",
