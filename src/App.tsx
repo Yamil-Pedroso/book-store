@@ -7,12 +7,16 @@ import BookSliderPage from './pages/BookSliderPage'
 import ReadingBookPage from './pages/ReadingBookPage'
 import LiveClockPage from './pages/LiveClockPage'
 import BookMarkPage from './pages/BookMarkPage'
+import {  Toaster } from 'sonner'
 
 function App() {
   return (
     <div>
       <Aside />
       <Search />
+      <Toaster 
+        position="top-right"
+      />
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />

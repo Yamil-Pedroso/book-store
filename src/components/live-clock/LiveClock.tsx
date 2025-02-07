@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaBookReader } from "react-icons/fa";
 import {
   Container,
@@ -11,6 +11,8 @@ import {
   DirArrowWrapper,
 } from "./styles";
 import { avatar } from "../../assets/images";
+import { toast } from "sonner";
+import ConfettiComponent from "../common/confetti/Confetti";
 
 interface Book {
   id: number;
@@ -99,6 +101,9 @@ const initialBooks: Book[] = [
 ];
 
 const LiveClock = () => {
+  const dropZoneRef = useRef<HTMLDivElement>(null);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [books, setBooks] = useState<Book[]>(() => {
     const savedBooks = localStorage.getItem("books");
     return savedBooks ? JSON.parse(savedBooks) : initialBooks;
@@ -171,6 +176,31 @@ const LiveClock = () => {
       return 0;
     });
   };
+
+  useEffect(() => {
+    if (isFirstLoad) {
+      setIsFirstLoad(false); 
+      return; 
+    }
+    if (readBooks.length > 0 && readBooks.length % 3 === 0) {
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 8000);
+      switch (readBooks.length) {
+        case 3:
+          toast.success("Te has leído tres libros!");
+          break;
+        case 6:
+          toast.success("Wow, ¡has duplicado los libros leídos!");
+          break;
+        case 9:
+          toast.success("Vaya, ¡eres una máquina! 9 libros leídos");
+          break;
+        default:
+          toast.success(`Has leído ${readBooks.length} libros más!`);
+          break;
+      }
+    }
+  }, [readBooks.length]);
 
   return (
     <>
@@ -262,10 +292,12 @@ const LiveClock = () => {
 
         <DropZoneWrapper>
           <DropZone
+            ref={dropZoneRef}
             isHeightToHigh={window.innerWidth}
             onDrop={handleDrop}
             onDragOver={allowDrop}
           >
+            <ConfettiComponent isActive={showConfetti} containerRef={dropZoneRef} />
             <div className="user-info">
               <img src={avatar} alt="avatar-icon" className="user-avatar" />
             </div>
