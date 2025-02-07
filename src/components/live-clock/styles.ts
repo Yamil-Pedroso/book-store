@@ -54,6 +54,18 @@ export const DropZone = styled.div<IBookReadProps>`
   background: linear-gradient(135deg, #272935, #31314c);
   position: relative;
 
+  .user-info {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
   .num-book-read {
     display: flex;
     justify-content: center;

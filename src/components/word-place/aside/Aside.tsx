@@ -93,7 +93,7 @@ const Aside = () => {
       id: 4,
       text: "Bookmark",
       icon: <FiBookmark className="my-icon" />,
-      link: "#",
+      link: "/book-mark",
     },
     {
       id: 5,

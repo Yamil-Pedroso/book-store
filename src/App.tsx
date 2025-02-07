@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage'
 import BookSliderPage from './pages/BookSliderPage'
 import ReadingBookPage from './pages/ReadingBookPage'
 import LiveClockPage from './pages/LiveClockPage'
+import BookMarkPage from './pages/BookMarkPage'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/book-slider" element={<BookSliderPage />} />
           <Route path="/reading-books" element={<ReadingBookPage />} />
           <Route path="/live-clock" element={<LiveClockPage />} />
+          <Route path="/book-mark" element={<BookMarkPage />} />
         </Routes>
       </Router>
     </div>

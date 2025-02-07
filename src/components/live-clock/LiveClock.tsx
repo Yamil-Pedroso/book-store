@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { FaBookReader } from "react-icons/fa";
 import {
   Container,
@@ -10,6 +10,7 @@ import {
   ResetButton,
   DirArrowWrapper,
 } from "./styles";
+import { avatar } from "../../assets/images";
 
 interface Book {
   id: number;
@@ -85,8 +86,7 @@ const initialBooks: Book[] = [
   {
     id: 10,
     title: "The girl with the dragon tattoo",
-    cover:
-      "https://sdi4.chrislands.com/sdi/978/03/07/9/9780307949493.jpg",
+    cover: "https://sdi4.chrislands.com/sdi/978/03/07/9/9780307949493.jpg",
     startTime: Date.now() - 9000000, // 2.5 horas de lectura
   },
   {
@@ -266,10 +266,11 @@ const LiveClock = () => {
             onDrop={handleDrop}
             onDragOver={allowDrop}
           >
+            <div className="user-info">
+              <img src={avatar} alt="avatar-icon" className="user-avatar" />
+            </div>
             <div className="num-book-read">
-                <span>
-                  {readBooks.length}
-                </span>
+              <span>{readBooks.length}</span>
             </div>
             {readBooks.length > 0 ? (
               readBooks.map((book) => (

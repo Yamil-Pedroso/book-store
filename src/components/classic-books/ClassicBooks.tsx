@@ -64,7 +64,7 @@ const ClassicBooks = () => {
       />
 
       <div className="api-books-container">
-        <h2>Books from the API</h2>
+        <h2>Books Store</h2>
         {loading ? (
           <div className="api-books-grid">
             {[...Array(10)].map((_, index) => (
