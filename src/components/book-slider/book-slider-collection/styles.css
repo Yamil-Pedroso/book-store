@@ -123,6 +123,10 @@
   margin-top: 2.5rem;
 }
 
+.new-coll-wrapper {
+   position: relative;
+}
+
  .new-coll-wrapper p {
   width: 30rem;
   color: #252526;
