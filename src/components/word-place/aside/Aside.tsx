@@ -44,8 +44,15 @@ const IconContainer = styled.div`
   }
 
   a {
+    display: flex;  
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    
     color: #1d202e;
     font-size: 2rem;
+    line-height: 0; 
 
     &:hover {
       color: white;
@@ -117,15 +124,26 @@ const Aside = () => {
             onMouseEnter={() => setHoveredIcon(menu.id)}
             onMouseLeave={() => setHoveredIcon(null)}
           >
-            <a href={menu.link}>{menu.icon}</a>
-            {hoveredIcon === menu.id && <Tooltip
-             as={motion.div}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-            >{menu.text}</Tooltip>}
+            <a
+              href={menu.link}
+              style={menu.id === 1 ? { marginTop: "-.3rem" } : undefined}
+            >
+              {menu.icon}
+            </a>
+
+            {hoveredIcon === menu.id && (
+              <Tooltip
+                as={motion.div}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+              >
+                {menu.text}
+              </Tooltip>
+            )}
           </IconContainer>
+
         ))}
         {/*<div className="icon-menu-lines">
           <RiMenu3Line style={{ fontSize: '2rem', color: '#1d202e' }} />

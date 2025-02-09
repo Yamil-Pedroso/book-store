@@ -32,6 +32,9 @@ const ClassicBooks = () => {
     return highQualityCovers[book.id] || book.formats["image/jpeg"];
   };
 
+  const hiddenBookId = 26184;
+
+
   useEffect(() => {
     setMyBooks;
   }, [myBooks]);
@@ -108,24 +111,29 @@ const ClassicBooks = () => {
         ) : (
           <div className="api-books-grid">
             {filteredBooks.map((book) => (
-              <div key={book.id} className="api-book-card">
-                <div className="book-img-wrapper">
-                  {book.formats["image/jpeg"] && (
-                    <img src={getBookCover(book)} alt={book.title} />
-                  )}
+              book.id === hiddenBookId ? null : (
+                <div key={book.id} className="api-book-card">
+                  <div className="book-img-wrapper">
+                    {book.formats["image/jpeg"] && (
+                      <img src={getBookCover(book)} alt={book.title} />
+                    )}
+                  </div>
+                  <h3>{book.title}</h3>
+                  <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                    <p className="author">
+                      {book.authors.map((author) => author.name).join(", ")}
+                    </p>
+                    {/*} <span style={{ color: "red" }}> {book.id} </span>*/}
+
+                    <div className="downloads-wrapper">
+                      <IoMdCloudDownload className="download-icon"
+                      />
+                      <p className="downloads">{book.download_count} downloads</p>
+                    </div>
+
+                  </div>
                 </div>
-                <h3>{book.title}</h3>
-                <p className="author">
-                  {book.authors.map((author) => author.name).join(", ")}
-                </p>
-                <span>
-                  {book.id}
-                </span>
-                <div className="downloads-wrapper">
-                  <IoMdCloudDownload />
-                  <p className="downloads">{book.download_count} downloads</p>
-                </div>
-              </div>
+              )
             ))}
           </div>
         )}

@@ -157,7 +157,7 @@
 .api-book-card .author {
   font-size: 0.9rem;
   color: #777;
-  margin-top: -1rem;
+  margin-top: 0rem;
 }
 
 /* Descargas */
@@ -165,7 +165,12 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-top: -2rem;
+  margin-top: -.8rem;
+
+  .download-icon {
+    font-size: 1.2rem;
+    color: #444;
+  }
 }
 .api-book-card .downloads {
   font-size: 0.9rem;
