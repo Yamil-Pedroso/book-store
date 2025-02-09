@@ -25,10 +25,9 @@
 
 .book-slider-coll-wrapper {
   display: flex;
-
-  div {
-    margin: 0 1rem;
-  }
+  width: auto;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .author-book-wrapper {
@@ -92,13 +91,14 @@
 
  .book-slider-content {
     display: flex;
-    width: 10rem;
+    width: 12rem;
     height: 18rem;
     overflow: hidden;
     box-shadow: -10px 10px 5px 0px rgba(0,0,0,0.75);
     transition: 0.5s ease;
     background: #21201e;
     animation: imgAppears .5s ease;
+
 }
 
 .book-slider-content:hover {
@@ -111,10 +111,15 @@
 }
 
 .book-slider-content img {
-    width: 14rem;
+    width: 12rem;
     height: 18.5rem;
     object-fit: cover;
 }
+
+.book-slider {
+  margin: 0 2rem; 
+}
+
 
 .counter-books-new-coll-wrapper {
   display: flex;

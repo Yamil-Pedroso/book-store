@@ -51,3 +51,18 @@ export const fetchBookId = async (id: number): Promise<Book | null> => {
         return null;
     }
 }
+
+// Save books to Dashboard
+export const saveBookToDashboard = (book: Book) => {
+    const saveBooks = JSON.parse(localStorage.getItem("userBooks") || "[]")
+
+    const bookExists = saveBooks.some((saveBooks: Book) => saveBooks.id === book.id)
+
+    if(bookExists) {
+       alert("The book is already saved")
+       return 
+    }
+
+    localStorage.setItem("userBooks", JSON.stringify([...saveBooks, book]))
+    alert("The book is saved correctly")
+}

@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+import { Link, useNavigate } from "react-router-dom"
 import Skeleton from "react-loading-skeleton"; // 🔹 Importamos Skeleton
 import "react-loading-skeleton/dist/skeleton.css"; // 🔹 Estilos para los placeholders
 import "./styles.css";
@@ -8,7 +9,7 @@ import { IoMdCloudDownload } from "react-icons/io";
 import { highQualityCovers } from "../../data/highQualityCovers";
 
 // Books from the API
-import { fetchBooks } from "../../services/BooksService";
+import { fetchBooks, saveBookToDashboard } from "../../services/BooksService";
 import { Book } from "../../services/BooksService";
 
 interface BookProps {
@@ -18,15 +19,20 @@ interface BookProps {
   active: boolean;
 }
 
+interface IBook {
+  book: Book
+}
+
 const title = "Happy reading, Yami";
 
 const subTitle =
   "Wow, you have chosen a book of magic, spells and incantations full of adventures! Harry Potter, The Boy Who Survived. We wish you a pleasant read and a pleasant reading and that you immerse yourself in these pages of ancient wizards and unforgettable characters!";
 
-const ClassicBooks = () => {
+const ClassicBooks = ({book}: IBook) => {
   const [myBooks, setMyBooks] = useState<BookProps[]>(books);
   const [apiBooks, setApiBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const navigate = useNavigate()
 
   const getBookCover = (book: Book) => {
     return highQualityCovers[book.id] || book.formats["image/jpeg"];
@@ -38,6 +44,11 @@ const ClassicBooks = () => {
   useEffect(() => {
     setMyBooks;
   }, [myBooks]);
+
+  const handleSaveAndRedirect = () => {
+    saveBookToDashboard(book);
+    navigate("/book-slider"); 
+  };
 
   // Fetch books from the API
   useEffect(() => {
@@ -123,6 +134,7 @@ const ClassicBooks = () => {
                     <p className="author">
                       {book.authors.map((author) => author.name).join(", ")}
                     </p>
+                    <button style={{ cursor: "pointer"}} onClick={() => {saveBookToDashboard(book), handleSaveAndRedirect}}><a href="/user-books">Save book</a></button>
                     {/*} <span style={{ color: "red" }}> {book.id} </span>*/}
 
                     <div className="downloads-wrapper">
