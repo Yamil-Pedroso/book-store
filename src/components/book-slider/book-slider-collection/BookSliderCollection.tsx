@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from "react-router-dom";
 import { bookSliderData } from '../../../data/bookSlider'
 import UserProfilAccount from '../../common/user-profil-account/UserProfilAccount'
 import Marquee from 'react-marquee-slider'
@@ -16,6 +17,7 @@ interface IBookSliderData {
 }
 
 const BookSliderCollection = () => {
+  const navigate = useNavigate()
   const [hover, setHover] = useState(false)
   const [bookSliderCollData, setBookSliderCollData] = useState<
     IBookSliderData[]
@@ -27,6 +29,10 @@ const BookSliderCollection = () => {
 
   const [savedBooks, setSavedBooks] = useState<Book[]>([]);
   const [forceRender, setForceRender] = useState(false);
+
+  const handleBookClick = (bookId: number) => {
+    navigate(`/book-reader/${bookId}`);
+  };
 
   const getBookCover = (book: Book) => {
     return highQualityCovers[book.id] || book.formats["image/jpeg"];
@@ -129,7 +135,7 @@ const BookSliderCollection = () => {
     setInsertedBox(prev => prev.slice(0, -1))
   }
 
-  const sliderWidth = `${savedBooks.length * 200}px`;
+  const sliderWidth = `${savedBooks.length * 600}px`;
 
   return (
     <div className="book-slider-coll-container">
@@ -143,18 +149,18 @@ const BookSliderCollection = () => {
             <div className="author-book-img">
               <div className="img-wrapper">
                 <img
-                  src={bookSliderCollData[0].authorAvatar}
+                  src={""}
                   alt="book-slider-img"
                   width="100"
                 />
               </div>
               <div className="author-name-wrapper">
-                <p className="author-name">{bookSliderCollData[0].author}</p>
+                <p className="author-name">Hola</p>
                 <p>Author</p>
               </div>
             </div>
             <div className="desc-book-wrapper">
-              <p className="author-name">{bookSliderCollData[0].desc}</p>
+              <p className="author-name">Hola</p>
             </div>
           </div>
         ) : (
@@ -163,22 +169,23 @@ const BookSliderCollection = () => {
             <div className="author-book">
               <div className="author-book-img">
                 <div className="img-wrapper">
+
                   <img
-                    src={bookSliderCollData[hoveredBookIndex].authorAvatar}
+                    src={getBookCover(savedBooks[hoveredBookIndex])}
                     alt="book-slider-img"
                     width="100"
                   />
                 </div>
                 <div className="author-name-wrapper">
                   <p className="author-name">
-                    {bookSliderCollData[hoveredBookIndex].author}
+                    {savedBooks[hoveredBookIndex].authors.map((author) => author.name).join(", ")}
                   </p>
                   <p>Author</p>
                 </div>
               </div>
               <div className="desc-book-wrapper">
                 <p className="author-name">
-                  {bookSliderCollData[hoveredBookIndex].desc}
+                  {savedBooks[hoveredBookIndex].subjects}
                 </p>
               </div>
             </div>
@@ -191,7 +198,10 @@ const BookSliderCollection = () => {
         ) : (
         <Marquee {...marqueeProps}>
           {savedBooks.map((book: any, idx: number) => (
-            <div key={book.id} className="book-slider">
+            <div key={book.id}
+              className="book-slider"
+              onClick={() => handleBookClick(book.id)}
+              >
               <div
                 onMouseEnter={() => handleMouseOver(idx)}
                 onMouseLeave={handleMouseLeave}
@@ -204,7 +214,7 @@ const BookSliderCollection = () => {
                 </div>
                 <div className="book-title-wrapper">
                   <p className="book-title active">{book.title}</p>
-                  <p className="book-desc">{book.desc}</p>
+                  <p className="book-desc">{book.subjects}</p>
                 </div>
               </div>
             </div>

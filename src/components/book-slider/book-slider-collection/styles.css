@@ -81,7 +81,8 @@
 }
 
 .book-title-wrapper .book-title {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    padding: 1.5rem;
 }
 
 .book-title-wrapper p {
@@ -117,7 +118,13 @@
 }
 
 .book-slider {
-  margin: 0 2rem; 
+  margin: 0 2rem;
+}
+
+.book-desc {
+   margin-top: -3rem;
+   padding: 1.5rem;
+   font-size: .8rem;
 }
 
 

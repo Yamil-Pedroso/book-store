@@ -1,12 +1,13 @@
 import instance from "../api/axiosConfig";
 const booksEndpoints = "/books";
 
+
 export interface Author {
     name: string;
     birth_year: number | null;
     death_year: number | null;
   }
-  
+
   export interface Book {
     id: number;
     title: string;
@@ -29,11 +30,12 @@ export interface Author {
     };
     download_count: number;
   }
-  
+
 // Get books from the API
 export const fetchBooks = async (limit: number = 10): Promise<Book[]> => {
    try {
      const response = await instance.get<{ results: Book[]}>(`${booksEndpoints}/?limit=${limit}&language=en, es`);
+     console.log(response.data.results);
      return response.data.results;
    } catch (error) {
         console.error("Error fetching books", error);
@@ -53,16 +55,16 @@ export const fetchBookId = async (id: number): Promise<Book | null> => {
 }
 
 // Save books to Dashboard
-export const saveBookToDashboard = (book: Book) => {
-    const saveBooks = JSON.parse(localStorage.getItem("userBooks") || "[]")
+export const saveBookToDashboard = (book: Book, showNotification: (message: string, type?: "success" | "error") => void) => {
+  const saveBooks = JSON.parse(localStorage.getItem("userBooks") || "[]");
 
-    const bookExists = saveBooks.some((saveBooks: Book) => saveBooks.id === book.id)
+  const bookExists = saveBooks.some((savedBook: Book) => savedBook.id === book.id);
 
-    if(bookExists) {
-       alert("The book is already saved")
-       return 
-    }
+  if (bookExists) {
+      showNotification("The book is already saved", "error");
+      return;
+  }
 
-    localStorage.setItem("userBooks", JSON.stringify([...saveBooks, book]))
-    alert("The book is saved correctly")
-}
+  localStorage.setItem("userBooks", JSON.stringify([...saveBooks, book]));
+  showNotification("The book is saved correctly", "success");
+};

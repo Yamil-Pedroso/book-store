@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
 import Skeleton from "react-loading-skeleton"; // 🔹 Importamos Skeleton
 import "react-loading-skeleton/dist/skeleton.css"; // 🔹 Estilos para los placeholders
 import "./styles.css";
@@ -7,6 +7,8 @@ import { books } from "../../data/books";
 import LiteratureWorldHeader from "../common/header/LiteratureWorldHeader";
 import { IoMdCloudDownload } from "react-icons/io";
 import { highQualityCovers } from "../../data/highQualityCovers";
+import { FaSave } from "react-icons/fa";
+import { toast } from "sonner";
 
 // Books from the API
 import { fetchBooks, saveBookToDashboard } from "../../services/BooksService";
@@ -20,7 +22,7 @@ interface BookProps {
 }
 
 interface IBook {
-  book: Book
+  book: Book;
 }
 
 const title = "Happy reading, Yami";
@@ -28,11 +30,15 @@ const title = "Happy reading, Yami";
 const subTitle =
   "Wow, you have chosen a book of magic, spells and incantations full of adventures! Harry Potter, The Boy Who Survived. We wish you a pleasant read and a pleasant reading and that you immerse yourself in these pages of ancient wizards and unforgettable characters!";
 
-const ClassicBooks = ({book}: IBook) => {
+  const showNotification = (message: string, type: "success" | "error" = "success") => {
+    toast[type](message);
+};
+
+const ClassicBooks = ({ book }: IBook) => {
   const [myBooks, setMyBooks] = useState<BookProps[]>(books);
   const [apiBooks, setApiBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const getBookCover = (book: Book) => {
     return highQualityCovers[book.id] || book.formats["image/jpeg"];
@@ -40,14 +46,18 @@ const ClassicBooks = ({book}: IBook) => {
 
   const hiddenBookId = 26184;
 
-
   useEffect(() => {
     setMyBooks;
   }, [myBooks]);
 
-  const handleSaveAndRedirect = () => {
-    saveBookToDashboard(book);
-    navigate("/book-slider"); 
+  const handleSaveAndRedirect = (book: Book) => {
+    saveBookToDashboard(book, (message: string, type: "success" | "error" = "success") => {
+      toast[type](message);
+    });
+
+    setTimeout(() => {
+      navigate("/book-slider");
+    }, 1500); // Pequeño retraso para que el usuario vea la notificación antes de la navegación
   };
 
   // Fetch books from the API
@@ -121,7 +131,7 @@ const ClassicBooks = ({book}: IBook) => {
           </div>
         ) : (
           <div className="api-books-grid">
-            {filteredBooks.map((book) => (
+            {filteredBooks.map((book) =>
               book.id === hiddenBookId ? null : (
                 <div key={book.id} className="api-book-card">
                   <div className="book-img-wrapper">
@@ -130,23 +140,34 @@ const ClassicBooks = ({book}: IBook) => {
                     )}
                   </div>
                   <h3>{book.title}</h3>
-                  <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                    }}
+                  >
                     <p className="author">
                       {book.authors.map((author) => author.name).join(", ")}
                     </p>
-                    <button style={{ cursor: "pointer"}} onClick={() => {saveBookToDashboard(book), handleSaveAndRedirect}}><a href="/user-books">Save book</a></button>
+                    <div>
+                      <FaSave
+                        style={{ cursor: "pointer", color: "#272935", fontSize: "2rem" }}
+                        onClick={() => handleSaveAndRedirect(book)}
+                      />
+                    </div>
                     {/*} <span style={{ color: "red" }}> {book.id} </span>*/}
 
                     <div className="downloads-wrapper">
-                      <IoMdCloudDownload className="download-icon"
-                      />
-                      <p className="downloads">{book.download_count} downloads</p>
+                      <IoMdCloudDownload className="download-icon" />
+                      <p className="downloads">
+                        {book.download_count} downloads
+                      </p>
                     </div>
-
                   </div>
                 </div>
               )
-            ))}
+            )}
           </div>
         )}
       </div>
