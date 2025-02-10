@@ -80,10 +80,13 @@ export const TimerControls = styled.div`
 `;
 
 export const ReadingTimer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 1.2rem;
   color: #b0b0b0;
   margin-bottom: 1rem;
   background: rgba(0, 0, 0, 0.2);
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 2rem;
   border-radius: 8px;
 `;

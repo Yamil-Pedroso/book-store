@@ -12,6 +12,7 @@ import {
   ReadingTimer,
   TimerControls,
 } from "./styles";
+import { IoMdTime } from "react-icons/io";
 import { motion } from "framer-motion";
 
 const WORDS_PER_PAGE = 250;
@@ -142,6 +143,11 @@ const Reader = () => {
       .padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
 
+  const handleSaveTimeReading = () => {
+    console.log("⏳ Tiempo de lectura guardado:", formatTime(readingTime));
+    alert("⏳ Tiempo de lectura guardado: " + formatTime(readingTime));
+  };
+
   if (!book) return <p>Loading book...</p>;
 
   return (
@@ -151,7 +157,9 @@ const Reader = () => {
         by {book.authors.map((author) => author.name).join(", ")}
       </BookAuthor>
 
-      <ReadingTimer>⏳ Time Reading: {formatTime(readingTime)}</ReadingTimer>
+      <ReadingTimer><IoMdTime
+        onClick={handleSaveTimeReading}
+       style={{ fontSize: "2rem", cursor: "pointer"}} /> Time Reading: {formatTime(readingTime)}</ReadingTimer>
 
       <TimerControls>
         <PageButton onClick={() => setIsPaused(!isPaused)}>

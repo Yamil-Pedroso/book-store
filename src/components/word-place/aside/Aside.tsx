@@ -1,18 +1,25 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { IoHomeOutline, IoSettingsOutline } from "react-icons/io5";
 import { IoMdStopwatch } from "react-icons/io";
-import { RiBookLine, RiMenu3Line } from "react-icons/ri";
+import { RiBookLine } from "react-icons/ri";
+import { FaRegWindowMaximize, FaRegWindowRestore  } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
 import { FiBookmark } from "react-icons/fi";
 import { logoLiterature } from "../../../assets/images";
 import { motion } from "framer-motion";
 
-const AsideContainer = styled.div`
+interface AsideProps {
+  closeSidebar: boolean;
+}
+
+const AsideContainer = styled.div<AsideProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
   position: fixed;
+  padding: 1.25rem;
   left: 0;
   top: 0;
   height: 100vh;
@@ -44,15 +51,15 @@ const IconContainer = styled.div`
   }
 
   a {
-    display: flex;  
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 100%;
-    
+
     color: #1d202e;
     font-size: 2rem;
-    line-height: 0; 
+    line-height: 0;
 
     &:hover {
       color: white;
@@ -75,7 +82,14 @@ const Tooltip = styled.div`
 `;
 
 const Aside = () => {
+  const location = useLocation();
+  const isBookReaderPage = location.pathname.startsWith("/book-reader");
   const [hoveredIcon, setHoveredIcon] = useState<number | null>(null);
+  const [closeSidebar, setCloseSidebar] = useState<boolean>(false);
+
+  const handleSidebar = () => {
+    setCloseSidebar(!closeSidebar);
+  };
 
   const menuText = [
     {
@@ -111,12 +125,34 @@ const Aside = () => {
   ];
 
   return (
-    <AsideContainer>
+    <>
+    {
+      closeSidebar ? <IoClose style={{ color: "#7e7e7e", cursor: "pointer", fontSize: "2rem", position: "fixed", top: "1rem", left: "1rem"}} className="toggle-icon" onClick={handleSidebar} /> : null
+    }
+    <AsideContainer
+      as={motion.div}
+      initial={{ x: -300 }}
+      animate={{ x: closeSidebar ? -300 : 0 }}
+      transition={{ duration: 0.3, type: "tween" }}
+
+      closeSidebar={closeSidebar}
+      className="aside-container"
+    >
       <div className="logo-wrapper">
         <a href="/">
           <img src={logoLiterature} alt="logo-img" width={70} />
         </a>
       </div>
+      {isBookReaderPage && (
+          <FaRegWindowMaximize
+            style={{
+              color: "#1a1a1a",
+              cursor: "pointer",
+              fontSize: "2rem",
+            }}
+            onClick={handleSidebar}
+          />
+        )}
       <IconWrapper>
         {menuText.map((menu) => (
           <IconContainer
@@ -150,6 +186,7 @@ const Aside = () => {
         </div>*/}
       </IconWrapper>
     </AsideContainer>
+    </>
   );
 };
 
