@@ -269,6 +269,41 @@ const Reader = () => {
               </PageButton>
             </TimerControls>
           </Header>
+
+          <div
+            style={{
+              maxHeight: "220px",
+              maxWidth: "250px",
+              padding: "5rem",
+              border: "2px solid #777777",
+              borderRadius: "10px",
+              marginTop: "2rem",
+              fontSize: "1.2rem",
+              color: "#b0b0b0",
+              fontWeight: "bold",
+              overflowY: "auto",
+            }}
+          >
+              AI Recommendations
+              <span
+                style={{
+                  display: "block",
+                  marginTop: "1rem",
+                  fontSize: "1rem",
+                  fontWeight: "normal",
+                  color: "#7e7e7e",
+                }}
+              >
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+                nec purus nec nunc tincidunt fermentum. Nullam nec purus nec nunc
+                tincidunt fermentum. Nullam nec purus nec nunc tincidunt
+                fermentum. Nullam nec purus nec nunc tincidunt fermentum. Nullam
+                nec purus nec nunc tincidunt fermentum. Nullam nec purus nec nunc
+                tincidunt fermentum. Nullam nec purus nec nunc tincidunt
+                fermentum. Nullam nec purus nec nunc tincidunt fermentum. Nullam
+                nec purus nec nunc tincidunt fermentum. Nullam nec purus nec nunc
+              </span>
+          </div>
         </div>
       </ReaderWrapper>
     </ReaderContainer>
