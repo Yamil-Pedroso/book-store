@@ -39,6 +39,7 @@ const BookSliderCollection = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const loadSavedBooks = () => {
       console.log("Checking localStorage for saved books...");
       const storedBooks = localStorage.getItem("userBooks");

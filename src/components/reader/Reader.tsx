@@ -11,6 +11,9 @@ import {
   PageButton,
   ReadingTimer,
   TimerControls,
+  Header,
+  BookContentWrapper,
+  ReaderWrapper,
 } from "./styles";
 import { IoMdTime } from "react-icons/io";
 import { motion } from "framer-motion";
@@ -27,8 +30,17 @@ const Reader = () => {
   const [readingTime, setReadingTime] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [lastActivity, setLastActivity] = useState(Date.now());
+  const [hover, setHover] = useState(false);
 
   const bookContentRef = useRef<HTMLDivElement>(null); // 🔥 Referencia al área de lectura
+
+  const handleHover = () => {
+    setHover(!hover);
+  };
+
+  const handleLeave = () => {
+    setHover(false);
+  };
 
   useEffect(() => {
     const loadBook = async () => {
@@ -152,47 +164,84 @@ const Reader = () => {
 
   return (
     <ReaderContainer>
-      <BookTitle>{book.title}</BookTitle>
-      <BookAuthor>
-        by {book.authors.map((author) => author.name).join(", ")}
-      </BookAuthor>
+      <ReaderWrapper>
+        <div style={{ width: "800px" }}>
+          <BookContent ref={bookContentRef}>
+            <motion.div
+              key={currentPage}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+            >
+              {pages.length > 0
+                ? pages[currentPage]
+                : "Loading book content..."}
+            </motion.div>
+          </BookContent>
+        </div>
 
-      <ReadingTimer><IoMdTime
-        onClick={handleSaveTimeReading}
-       style={{ fontSize: "2rem", cursor: "pointer"}} /> Time Reading: {formatTime(readingTime)}</ReadingTimer>
+        <div style={{ marginLeft: "2rem" }}>
+          <BookContentWrapper>
+            <PaginationWrapper>
+              <PageButton onClick={prevPage} disabled={currentPage === 0}>
+                ⬅ Previous
+              </PageButton>
+              <span>
+                Page {currentPage + 1} of {pages.length}
+              </span>
+              <PageButton
+                onClick={nextPage}
+                disabled={currentPage === pages.length - 1}
+              >
+                Next ➡
+              </PageButton>
+            </PaginationWrapper>
+          </BookContentWrapper>
+          <Header>
+            <BookTitle>{book.title}</BookTitle>
+            <BookAuthor>
+              by {book.authors.map((author) => author.name).join(", ")}
+            </BookAuthor>
 
-      <TimerControls>
-        <PageButton onClick={() => setIsPaused(!isPaused)}>
-          {isPaused ? "▶ Resume" : "⏸ Pause"}
-        </PageButton>
-      </TimerControls>
+            <ReadingTimer>
+              <IoMdTime
+                onMouseEnter={handleHover}
+                onMouseLeave={handleLeave}
+                onClick={handleSaveTimeReading}
+                style={{ fontSize: "2rem", cursor: "pointer", position: "relative" }}
+              />{" "}
+              Time Reading: {formatTime(readingTime)}
+            </ReadingTimer>
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: hover ? 1 : 0, y: hover ? 0 : -10 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.5 }}
+                style={{
+                  position: "absolute",
+                  top: "10rem",
+                  right: "50rem",
+                  fontWeight: "bold",
+                  padding: ".5rem 1rem",
+                  borderRadius: "3rem",
+                  background: "#a8a8a8",
+                  color: "#181818",
+                  opacity: hover ? 1 : 0,
+                  zIndex: 1,
+                }}
+              >
+                Save time reading
+              </motion.div>
 
-      <BookContent ref={bookContentRef}>
-        <motion.div
-          key={currentPage}
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -50 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-        >
-          {pages.length > 0 ? pages[currentPage] : "Loading book content..."}
-        </motion.div>
-      </BookContent>
-
-      <PaginationWrapper>
-        <PageButton onClick={prevPage} disabled={currentPage === 0}>
-          ⬅ Previous
-        </PageButton>
-        <span>
-          Page {currentPage + 1} of {pages.length}
-        </span>
-        <PageButton
-          onClick={nextPage}
-          disabled={currentPage === pages.length - 1}
-        >
-          Next ➡
-        </PageButton>
-      </PaginationWrapper>
+            <TimerControls>
+              <PageButton onClick={() => setIsPaused(!isPaused)}>
+                {isPaused ? "▶ Resume" : "⏸ Pause"}
+              </PageButton>
+            </TimerControls>
+          </Header>
+        </div>
+      </ReaderWrapper>
     </ReaderContainer>
   );
 };

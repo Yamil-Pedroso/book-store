@@ -2,14 +2,26 @@ import styled from "styled-components";
 
 export const ReaderContainer = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  flex-direction: column;
+   width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
   background-color: #181818;
   color: #e0e0e0;
   font-family: "Merriweather", serif;
   padding: 2rem;
+  gap: 5rem;
+`;
+
+export const ReaderWrapper = styled.div`
+  display: flex;
+`;
+
+export const Header = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 export const BookTitle = styled.h1`
@@ -25,11 +37,18 @@ export const BookAuthor = styled.h3`
   margin-bottom: 1.5rem;
 `;
 
-export const BookContent = styled.div`
-  width: 90%;
-  max-width: 800px;
-  height: 72vh;
+export const BookContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+`;
 
+export const BookContent = styled.div`
+  flex-basis: 800px; 
+  flex-shrink: 0; 
+  flex-grow: 0; 
+  height: 72vh;
   display: flex;
   justify-content: center;
   background: #1e1e1e;
@@ -41,6 +60,10 @@ export const BookContent = styled.div`
   text-align: justify;
   white-space: pre-wrap;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+
+  div {
+    
+  }
 `;
 
 export const PaginationWrapper = styled.div`
@@ -72,7 +95,6 @@ export const PageButton = styled.button`
   }
 `;
 
-
 export const TimerControls = styled.div`
   margin-bottom: 1rem;
   display: flex;
@@ -89,4 +111,5 @@ export const ReadingTimer = styled.div`
   background: rgba(0, 0, 0, 0.2);
   padding: 0.5rem 2rem;
   border-radius: 8px;
+  position: relative;
 `;
