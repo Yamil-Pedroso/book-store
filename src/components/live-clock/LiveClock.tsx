@@ -187,16 +187,16 @@ const LiveClock = () => {
       setTimeout(() => setShowConfetti(false), 8000);
       switch (readBooks.length) {
         case 3:
-          toast.success("Te has leído tres libros!");
+          toast.success("You've read three books!");
           break;
         case 6:
-          toast.success("Wow, ¡has duplicado los libros leídos!");
+          toast.success("Wow, you've doubled the books you've read!");
           break;
         case 9:
-          toast.success("Vaya, ¡eres una máquina! 9 libros leídos");
+          toast.success("You're a machine! 9 books read!");
           break;
         default:
-          toast.success(`Has leído ${readBooks.length} libros más!`);
+          toast.success(`You've read ${readBooks.length} more books!`);
           break;
       }
     }

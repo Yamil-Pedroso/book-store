@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { fetchBookId } from "../../services/BooksService";
 import { Book } from "../../services/BooksService";
 import {
@@ -14,12 +14,14 @@ import {
   Header,
   BookContentWrapper,
   ReaderWrapper,
+  TimeReading,
+  ReadingProcess,
 } from "./styles";
 import { IoMdTime } from "react-icons/io";
 import { motion } from "framer-motion";
 
 const WORDS_PER_PAGE = 250;
-const INACTIVITY_TIME = 60; // ⏳ Segundos antes de pausar automáticamente
+const INACTIVITY_TIME = 60;
 
 const Reader = () => {
   const { id } = useParams<{ id: string }>();
@@ -32,7 +34,9 @@ const Reader = () => {
   const [lastActivity, setLastActivity] = useState(Date.now());
   const [hover, setHover] = useState(false);
 
-  const bookContentRef = useRef<HTMLDivElement>(null); // 🔥 Referencia al área de lectura
+  const bookContentRef = useRef<HTMLDivElement>(null);
+
+  console.log("📚 Book:", bookText);
 
   const handleHover = () => {
     setHover(!hover);
@@ -85,7 +89,7 @@ const Reader = () => {
       interval = setInterval(() => {
         if (Date.now() - lastActivity > INACTIVITY_TIME * 1000) {
           setIsPaused(true); // 🔥 Pausar automáticamente si no hay actividad
-          console.log("⏸ Pausado por inactividad.");
+          console.log("⏸ Paused for inactivity.");
         } else {
           setReadingTime((prevTime) => prevTime + 1);
         }
@@ -103,7 +107,7 @@ const Reader = () => {
       setLastActivity(Date.now());
       if (isPaused) {
         setIsPaused(false);
-        console.log("▶ Reanudado por actividad.");
+        console.log("▶ Resumed by user activity.");
       }
     };
 
@@ -156,8 +160,8 @@ const Reader = () => {
   };
 
   const handleSaveTimeReading = () => {
-    console.log("⏳ Tiempo de lectura guardado:", formatTime(readingTime));
-    alert("⏳ Tiempo de lectura guardado: " + formatTime(readingTime));
+    console.log("⏳ Read's time saved:", formatTime(readingTime));
+    alert("⏳ Read's time saved: " + formatTime(readingTime));
   };
 
   if (!book) return <p>Loading book...</p>;
@@ -205,34 +209,43 @@ const Reader = () => {
             </BookAuthor>
 
             <ReadingTimer>
-              <IoMdTime
-                onMouseEnter={handleHover}
-                onMouseLeave={handleLeave}
-                onClick={handleSaveTimeReading}
-                style={{ fontSize: "2rem", cursor: "pointer", position: "relative" }}
-              />{" "}
-              Time Reading: {formatTime(readingTime)}
+              <TimeReading>
+                <IoMdTime
+                  onMouseEnter={handleHover}
+                  onMouseLeave={handleLeave}
+                  onClick={handleSaveTimeReading}
+                  style={{ fontSize: "2rem", cursor: "pointer", position: "relative" }}
+                />{" "}
+                <p>Time Reading: {formatTime(readingTime)}
+                </p>
+              </TimeReading>
+
+              <ReadingProcess>
+                <Link to="/live-clock"
+
+                ><p>Reading process</p></Link>
+              </ReadingProcess>
             </ReadingTimer>
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: hover ? 1 : 0, y: hover ? 0 : -10 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.5 }}
-                style={{
-                  position: "absolute",
-                  top: "10rem",
-                  right: "50rem",
-                  fontWeight: "bold",
-                  padding: ".5rem 1rem",
-                  borderRadius: "3rem",
-                  background: "#a8a8a8",
-                  color: "#181818",
-                  opacity: hover ? 1 : 0,
-                  zIndex: 1,
-                }}
-              >
-                Save time reading
-              </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: hover ? 1 : 0, y: hover ? 0 : -10 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.5 }}
+              style={{
+                position: "absolute",
+                top: "10rem",
+                right: "50rem",
+                fontWeight: "bold",
+                padding: ".5rem 1rem",
+                borderRadius: "3rem",
+                background: "#a8a8a8",
+                color: "#181818",
+                opacity: hover ? 1 : 0,
+                zIndex: 1,
+              }}
+            >
+              Save time reading
+            </motion.div>
 
             <TimerControls>
               <PageButton onClick={() => setIsPaused(!isPaused)}>

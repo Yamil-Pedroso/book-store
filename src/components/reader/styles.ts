@@ -104,7 +104,9 @@ export const TimerControls = styled.div`
 export const ReadingTimer = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: space-between;
+  height: 3rem;
+  gap: 3rem;
   font-size: 1.2rem;
   color: #b0b0b0;
   margin-bottom: 1rem;
@@ -112,4 +114,26 @@ export const ReadingTimer = styled.div`
   padding: 0.5rem 2rem;
   border-radius: 8px;
   position: relative;
+`;
+
+export const TimeReading = styled.div`
+  display: flex;
+  align-items: center;
+
+  p {
+    margin-left: .3rem;
+  }
+`;  
+
+export const ReadingProcess = styled.div`
+   text-decoration: underline;
+
+  a {
+    font-size: .9rem;
+    color: #b0b0b0;
+
+    &:hover {
+      color: #d77575;
+    }
+  }
 `;
