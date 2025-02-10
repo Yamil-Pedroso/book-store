@@ -19,7 +19,7 @@ import {
 } from "./styles";
 import { IoMdTime } from "react-icons/io";
 import { motion } from "framer-motion";
-import { use } from "framer-motion/client";
+import Loading from "../common/loading/Loading";
 
 const WORDS_PER_PAGE = 250;
 const INACTIVITY_TIME = 60;
@@ -175,7 +175,7 @@ const Reader = () => {
     alert("⏳ Read's time saved: " + formatTime(readingTime));
   };
 
-  if (!book) return <p>Loading book...</p>;
+  if (!book) return <Loading />;
 
   return (
     <ReaderContainer>
@@ -191,7 +191,12 @@ const Reader = () => {
             >
               {pages.length > 0
                 ? pages[currentPage]
-                : "Loading book content..."}
+                : <Loading style={{ position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)"
+
+                }} />}
             </motion.div>
           </BookContent>
         </div>

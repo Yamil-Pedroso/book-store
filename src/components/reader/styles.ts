@@ -45,9 +45,9 @@ export const BookContentWrapper = styled.div`
 `;
 
 export const BookContent = styled.div`
-  flex-basis: 800px; 
-  flex-shrink: 0; 
-  flex-grow: 0; 
+  flex-basis: 800px;
+  flex-shrink: 0;
+  flex-grow: 0;
   height: 72vh;
   display: flex;
   justify-content: center;
@@ -60,9 +60,9 @@ export const BookContent = styled.div`
   text-align: justify;
   white-space: pre-wrap;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-
+  position: relative;
   div {
-    
+
   }
 `;
 
@@ -123,7 +123,7 @@ export const TimeReading = styled.div`
   p {
     margin-left: .3rem;
   }
-`;  
+`;
 
 export const ReadingProcess = styled.div`
    text-decoration: underline;
