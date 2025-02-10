@@ -19,6 +19,7 @@ import {
 } from "./styles";
 import { IoMdTime } from "react-icons/io";
 import { motion } from "framer-motion";
+import { use } from "framer-motion/client";
 
 const WORDS_PER_PAGE = 250;
 const INACTIVITY_TIME = 60;
@@ -137,6 +138,16 @@ const Reader = () => {
     );
     setPages(paginatedText);
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      const bookContentElement = bookContentRef.current;
+      if (bookContentElement) {
+        bookContentElement.scrollTo(0, 0);
+      }
+    }, 100);
+  }
+    , [currentPage]);
 
   const nextPage = () => {
     if (currentPage < pages.length - 1) {
