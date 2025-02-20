@@ -20,6 +20,7 @@ import {
 import { IoMdTime } from "react-icons/io";
 import { motion } from "framer-motion";
 import Loading from "../common/loading/Loading";
+import AIRecommendation from "../common/ai-recommendation/AIRecommendation";
 
 const WORDS_PER_PAGE = 250;
 const INACTIVITY_TIME = 60;
@@ -89,7 +90,7 @@ const Reader = () => {
     if (!isPaused) {
       interval = setInterval(() => {
         if (Date.now() - lastActivity > INACTIVITY_TIME * 1000) {
-          setIsPaused(true); // 🔥 Pausar automáticamente si no hay actividad
+          setIsPaused(true);
           console.log("⏸ Paused for inactivity.");
         } else {
           setReadingTime((prevTime) => prevTime + 1);
@@ -102,7 +103,6 @@ const Reader = () => {
     };
   }, [isPaused, lastActivity]);
 
-  // 🔥 Detectar actividad (movimiento del mouse, teclas o scroll en la zona de lectura)
   useEffect(() => {
     const resetTimer = () => {
       setLastActivity(Date.now());
@@ -115,7 +115,6 @@ const Reader = () => {
     window.addEventListener("mousemove", resetTimer);
     window.addEventListener("keydown", resetTimer);
 
-    // 🔥 Detectar scroll en el área de lectura
     const bookContentElement = bookContentRef.current;
     if (bookContentElement) {
       bookContentElement.addEventListener("scroll", resetTimer);
@@ -272,37 +271,18 @@ const Reader = () => {
 
           <div
             style={{
-              maxHeight: "220px",
-              maxWidth: "250px",
-              padding: "5rem",
-              border: "2px solid #777777",
+              //maxHeight: "220px",
+              //maxWidth: "250px",
+              padding: "2rem",
               borderRadius: "10px",
-              marginTop: "2rem",
+              marginTop: "1rem",
               fontSize: "1.2rem",
               color: "#b0b0b0",
               fontWeight: "bold",
               overflowY: "auto",
             }}
           >
-              AI Recommendations
-              <span
-                style={{
-                  display: "block",
-                  marginTop: "1rem",
-                  fontSize: "1rem",
-                  fontWeight: "normal",
-                  color: "#7e7e7e",
-                }}
-              >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                nec purus nec nunc tincidunt fermentum. Nullam nec purus nec nunc
-                tincidunt fermentum. Nullam nec purus nec nunc tincidunt
-                fermentum. Nullam nec purus nec nunc tincidunt fermentum. Nullam
-                nec purus nec nunc tincidunt fermentum. Nullam nec purus nec nunc
-                tincidunt fermentum. Nullam nec purus nec nunc tincidunt
-                fermentum. Nullam nec purus nec nunc tincidunt fermentum. Nullam
-                nec purus nec nunc tincidunt fermentum. Nullam nec purus nec nunc
-              </span>
+            <AIRecommendation />
           </div>
         </div>
       </ReaderWrapper>

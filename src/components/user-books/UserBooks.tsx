@@ -9,22 +9,14 @@ const Container = styled.div`
   margin-left: 30rem;
 `;
 
-const BookImgWrapper = styled.div`
-  width: 20rem;
-  overflow: hidden;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`;
 
 const UserBooks = () => {
   const { id } = useParams<{ id: string }>();
   const [book, setBook] = useState<Book | null>(null);
   const [savedBooks, setSavedBooks] = useState<Book[]>([]);
-  const [forceRender, setForceRender] = useState(false); // 🔥 Forzar render
+  const [forceRender, setForceRender] = useState(false); 
+
+  console.log("book", book);
 
   const getBookCover = (book: Book) => {
     return highQualityCovers[book.id] || book.formats["image/jpeg"];

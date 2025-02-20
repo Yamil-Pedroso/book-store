@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Skeleton from "react-loading-skeleton"; // 🔹 Importamos Skeleton
 import "react-loading-skeleton/dist/skeleton.css"; // 🔹 Estilos para los placeholders
 import "./styles.css";
@@ -21,20 +21,12 @@ interface BookProps {
   active: boolean;
 }
 
-interface IBook {
-  book: Book;
-}
-
 const title = "Happy reading, Yami";
 
 const subTitle =
   "Wow, you have chosen a book of magic, spells and incantations full of adventures! Harry Potter, The Boy Who Survived. We wish you a pleasant read and a pleasant reading and that you immerse yourself in these pages of ancient wizards and unforgettable characters!";
 
-  const showNotification = (message: string, type: "success" | "error" = "success") => {
-    toast[type](message);
-};
-
-const ClassicBooks = ({ book }: IBook) => {
+const ClassicBooks = () => {
   const [myBooks, setMyBooks] = useState<BookProps[]>(books);
   const [apiBooks, setApiBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(true);

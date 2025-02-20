@@ -25,7 +25,7 @@ const BookSliderCollection = () => {
   const [textActive, setTextActive] = useState(false)
   const [hoveredBookIndex, setHoveredBookIndex] = useState<number | null>(null)
   const [stopFirstBookMovement, setStopFirstBookMovement] = useState(false)
-  const [insertedBox, setInsertedBox] = useState<null[]>([])
+  //const [insertedBox, setInsertedBox] = useState<null[]>([])
 
   const [savedBooks, setSavedBooks] = useState<Book[]>([]);
   const [forceRender, setForceRender] = useState(false);
@@ -128,13 +128,13 @@ const BookSliderCollection = () => {
 
 
 
-  const handleInsertBox = () => {
-    setInsertedBox((prev) => [...prev, null])
-  }
-
-  const handleDelBox = () => {
-    setInsertedBox(prev => prev.slice(0, -1))
-  }
+  //const handleInsertBox = () => {
+  //  setInsertedBox((prev) => [...prev, null])
+  //}
+//
+  //const handleDelBox = () => {
+  //  setInsertedBox(prev => prev.slice(0, -1))
+  //}
 
   const sliderWidth = `${savedBooks.length * 600}px`;
 

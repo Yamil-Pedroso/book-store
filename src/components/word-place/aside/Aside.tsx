@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { IoHomeOutline, IoSettingsOutline } from "react-icons/io5";
 import { IoMdStopwatch } from "react-icons/io";
 import { RiBookLine } from "react-icons/ri";
-import { FaRegWindowMaximize, FaRegWindowRestore } from "react-icons/fa";
+import { FaRegWindowMaximize } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { FiBookmark } from "react-icons/fi";
 import { logoLiterature } from "../../../assets/images";
