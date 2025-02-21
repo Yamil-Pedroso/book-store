@@ -1,4 +1,12 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const borderAnimation = keyframes`
+0% { border-color: rgba(100, 149, 237, 1); }   /* Azul pastel */
+  25% { border-color: rgba(186, 85, 211, 1); }   /* Fucsia apagado */
+  50% { border-color: rgba(123, 104, 238, 1); }  /* Azul lavanda */
+  75% { border-color: rgba(219, 112, 147, 1); }  /* Rosa fucsia suave */
+  100% { border-color: rgba(100, 149, 237, 1); } /* Vuelve al Azul pastel */
+`;
 
 export const ReaderContainer = styled.div`
   display: flex;
@@ -17,6 +25,12 @@ export const ReaderContainer = styled.div`
 
 export const ReaderWrapper = styled.div`
   display: flex;
+
+  .ai-recommendation {
+    border: 1px solid rgba(255, 0, 0, 1);
+    animation: ${borderAnimation} 3s infinite linear;
+    transition: border .6s ease-in-out;
+  }
 `;
 
 export const Header = styled.div`

@@ -35,6 +35,8 @@ const Reader = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [lastActivity, setLastActivity] = useState(Date.now());
   const [hover, setHover] = useState(false);
+  const [showBorderDynamic, setShowBorderDynamic] = useState(false);
+  const [zoomWindow, setZoomWindow] = useState(false);
 
   const bookContentRef = useRef<HTMLDivElement>(null);
 
@@ -145,8 +147,7 @@ const Reader = () => {
         bookContentElement.scrollTo(0, 0);
       }
     }, 100);
-  }
-    , [currentPage]);
+  }, [currentPage]);
 
   const nextPage = () => {
     if (currentPage < pages.length - 1) {
@@ -188,14 +189,18 @@ const Reader = () => {
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
             >
-              {pages.length > 0
-                ? pages[currentPage]
-                : <Loading style={{ position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)"
-
-                }} />}
+              {pages.length > 0 ? (
+                pages[currentPage]
+              ) : (
+                <Loading
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                  }}
+                />
+              )}
             </motion.div>
           </BookContent>
         </div>
@@ -229,16 +234,19 @@ const Reader = () => {
                   onMouseEnter={handleHover}
                   onMouseLeave={handleLeave}
                   onClick={handleSaveTimeReading}
-                  style={{ fontSize: "2rem", cursor: "pointer", position: "relative" }}
+                  style={{
+                    fontSize: "2rem",
+                    cursor: "pointer",
+                    position: "relative",
+                  }}
                 />{" "}
-                <p>Time Reading: {formatTime(readingTime)}
-                </p>
+                <p>Time Reading: {formatTime(readingTime)}</p>
               </TimeReading>
 
               <ReadingProcess>
-                <Link to="/live-clock"
-
-                ><p>Reading process</p></Link>
+                <Link to="/live-clock">
+                  <p>Reading process</p>
+                </Link>
               </ReadingProcess>
             </ReadingTimer>
             <motion.div
@@ -270,19 +278,30 @@ const Reader = () => {
           </Header>
 
           <div
+            className={`${showBorderDynamic ? "ai-recommendation" : ""}`}
             style={{
-              //maxHeight: "220px",
-              //maxWidth: "250px",
+              width: zoomWindow ? "50rem" : "28rem",
+              height: zoomWindow ? "25rem" : "19rem",
+              position: zoomWindow ? "absolute" : "relative",
+              right: zoomWindow ? "2rem" : "0",
+              bottom: zoomWindow ? "2rem" : "0",
+              background: zoomWindow ? "#e8e6db" : "transparent",
+              color: zoomWindow ? "#3b3b3b" : "#b0b0b0",
+              transition: "all 0.3s ease-in-out",
               padding: "2rem",
               borderRadius: "10px",
               marginTop: "1rem",
               fontSize: "1.2rem",
-              color: "#b0b0b0",
               fontWeight: "bold",
               overflowY: "auto",
             }}
           >
-            <AIRecommendation />
+            <AIRecommendation
+              showBorderDynamic={showBorderDynamic}
+              setShowBorderDynamic={setShowBorderDynamic}
+              zoomWindow={zoomWindow}
+              setZoomWindow={setZoomWindow}
+            />
           </div>
         </div>
       </ReaderWrapper>

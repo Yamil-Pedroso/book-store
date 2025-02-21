@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, keyframes } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -9,13 +9,29 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export const Window = styled.div`
-  width: 28rem;
-  height: 19rem;
+const zoomInOut = keyframes`
+  0% { transform: scale(1); }
+  100% { transform: scale(1.2); }
+`;
+
+export const Window = styled.div<{ zoom: boolean }>`
+   width: ${({ zoom }) => (zoom ? "35rem" : "28rem")}; /* Cambia de tamaño */
+   height: ${({ zoom }) => (zoom ? "25rem" : "19rem")};
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
   font-family: "Roboto", sans-serif;
+   position: relative;
+   animation: ${({ zoom }) => (zoom ? zoomInOut : "none")} 0.3s ease-in-out;
+
+   .zoom-icon {
+    position: absolute;
+    top: -.8rem;
+    right: -.5rem;
+    cursor: pointer;
+    color: #666666;
+    z-index: 1;
+  }
 
   .footer span {
     display: inline-flex;
@@ -71,12 +87,12 @@ export const MessageContent = styled.div`
     }
 
     &::-webkit-scrollbar-thumb {
-        background: #888; 
+        background: #888;
         border-radius: 10px;
     }
 
     &::-webkit-scrollbar-thumb:hover {
-        background: #555; 
+        background: #555;
     }
 
     scrollbar-width: thin;
@@ -103,7 +119,7 @@ export const MessageContent = styled.div`
                 width: 2rem;
             height: 2rem;
             border-radius: 50%;
-            
+
                 filter: brightness(0.7);
             }
         }
