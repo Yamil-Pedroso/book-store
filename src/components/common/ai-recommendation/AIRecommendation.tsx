@@ -185,12 +185,12 @@ const AIRecommendation: React.FC<IAIRecommendation> = ({ showBorderDynamic, setS
            zoomWindow ? (
             <MdOutlineZoomInMap
               onClick={handleZoomWindow}
-              className="zoom-icon"
+              className="zoom-icon-in"
             />
           ) : (
             <MdOutlineZoomOutMap
               onClick={handleZoomWindow}
-              className="zoom-icon"
+              className="zoom-icon-out"
             />
           )
         }
@@ -213,7 +213,9 @@ const AIRecommendation: React.FC<IAIRecommendation> = ({ showBorderDynamic, setS
             />
           )}
         </InputContainer>
-        <MessageContent>
+        <MessageContent
+         style={{ width: zoomWindow ? "47rem" : "" }}
+        >
           {messages.map((message, index) => (
             <div key={index} className="sms-sender">
               <div className="avatar">
@@ -222,7 +224,8 @@ const AIRecommendation: React.FC<IAIRecommendation> = ({ showBorderDynamic, setS
                 )}
               </div>
 
-              <span>{message.text}</span>
+              <span
+              >{message.text}</span>
             </div>
           ))}
         </MessageContent>

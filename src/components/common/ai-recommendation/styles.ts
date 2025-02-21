@@ -15,19 +15,28 @@ const zoomInOut = keyframes`
 `;
 
 export const Window = styled.div<{ zoom: boolean }>`
-   width: ${({ zoom }) => (zoom ? "35rem" : "28rem")}; /* Cambia de tamaño */
-   height: ${({ zoom }) => (zoom ? "25rem" : "19rem")};
+  width: ${({ zoom }) => (zoom ? "35rem" : "28rem")}; /* Cambia de tamaño */
+  height: ${({ zoom }) => (zoom ? "25rem" : "19rem")};
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
   font-family: "Roboto", sans-serif;
-   position: relative;
-   animation: ${({ zoom }) => (zoom ? zoomInOut : "none")} 0.3s ease-in-out;
+  position: relative;
+  animation: ${({ zoom }) => (zoom ? zoomInOut : "none")} 0.3s ease-in-out;
 
-   .zoom-icon {
+  .zoom-icon-out {
     position: absolute;
-    top: -.8rem;
-    right: -.5rem;
+    top: -1.2rem;
+    right: -1.2rem;
+    cursor: pointer;
+    color: #666666;
+    z-index: 1;
+  }
+
+  .zoom-icon-in {
+    position: absolute;
+    top: -0.8rem;
+    right: -15rem;
     cursor: pointer;
     color: #666666;
     z-index: 1;
@@ -71,61 +80,60 @@ export const WindowContent = styled.div`
 `;
 
 export const MessageContent = styled.div`
-    height: 100%;
-    overflow-y: auto;
-    padding: 0.5rem;
-    font-size: 1rem;
-    color: #666666;
+  height: 100%;
+  overflow-y: auto;
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: #666666;
 
-    &::-webkit-scrollbar {
-        width: 6px;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #0b0b0b;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: #4d4d4d #121212;
+
+  .sms-sender {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.6rem;
+
+    span {
+      margin-left: 0.5rem;
+      margin-top: 0.2rem;
     }
 
-    &::-webkit-scrollbar-track {
-        background: #0b0b0b;
-        border-radius: 10px;
+    .avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background-color: #121212;
+
+      .user-avatar {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+
+        filter: brightness(0.7);
+      }
     }
-
-    &::-webkit-scrollbar-thumb {
-        background: #888;
-        border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
-
-    scrollbar-width: thin;
-    scrollbar-color: #4d4d4d #121212;
-
-    .sms-sender {
-        display: flex;
-        align-items: center;
-        margin-bottom: .6rem;
-
-        span {
-            margin-left: .5rem;
-            margin-top: .2rem;
-        }
-
-        .avatar {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background-color: #121212;
-
-            .user-avatar {
-                width: 2rem;
-            height: 2rem;
-            border-radius: 50%;
-
-                filter: brightness(0.7);
-            }
-        }
-    }
+  }
 `;
-
 
 export const CloseButton = styled.div`
   padding: 0.2rem 0.5rem;
@@ -145,11 +153,14 @@ export const InputContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  .up-arrow, .stop-icon {
-    padding: .9rem;
-    background-color: #121212;
+  .up-arrow,
+  .stop-icon {
+    padding: 1rem;
+    //background-color: #121212;
     color: #666666;
     cursor: pointer;
+    position: absolute;
+    right: 0.5rem;
   }
 `;
 

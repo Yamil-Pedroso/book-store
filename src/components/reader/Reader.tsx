@@ -280,20 +280,19 @@ const Reader = () => {
           <div
             className={`${showBorderDynamic ? "ai-recommendation" : ""}`}
             style={{
-              width: zoomWindow ? "50rem" : "28rem",
-              height: zoomWindow ? "25rem" : "19rem",
+              width: zoomWindow ? "50rem" : "29rem",
+              height: zoomWindow ? "20rem" : "17.3rem",
               position: zoomWindow ? "absolute" : "relative",
               right: zoomWindow ? "2rem" : "0",
-              bottom: zoomWindow ? "2rem" : "0",
-              background: zoomWindow ? "#e8e6db" : "transparent",
+              bottom: zoomWindow ? "10rem" : "0",
+              background: zoomWindow ? "#070707" : "transparent",
               color: zoomWindow ? "#3b3b3b" : "#b0b0b0",
               transition: "all 0.3s ease-in-out",
               padding: "2rem",
               borderRadius: "10px",
               marginTop: "1rem",
-              fontSize: "1.2rem",
               fontWeight: "bold",
-              overflowY: "auto",
+              overflow: "hidden",
             }}
           >
             <AIRecommendation

@@ -25,11 +25,13 @@ export const ReaderContainer = styled.div`
 
 export const ReaderWrapper = styled.div`
   display: flex;
+  position: relative;
 
   .ai-recommendation {
     border: 1px solid rgba(255, 0, 0, 1);
     animation: ${borderAnimation} 3s infinite linear;
     transition: border .6s ease-in-out;
+   
   }
 `;
 
