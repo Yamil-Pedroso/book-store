@@ -16,11 +16,17 @@ import {
   ReaderWrapper,
   TimeReading,
   ReadingProcess,
+  AIRecommendationWrapper,
+  AIRecommendationBox,
+  IconWrapper,
 } from "./styles";
 import { IoMdTime } from "react-icons/io";
 import { motion } from "framer-motion";
 import Loading from "../common/loading/Loading";
 import AIRecommendation from "../common/ai-recommendation/AIRecommendation";
+import { FaBookBookmark } from "react-icons/fa6";
+import { FaCopy, FaFileDownload, FaShareAlt  } from "react-icons/fa";
+import { RiUserVoiceFill } from "react-icons/ri";
 
 const WORDS_PER_PAGE = 250;
 const INACTIVITY_TIME = 60;
@@ -39,8 +45,6 @@ const Reader = () => {
   const [zoomWindow, setZoomWindow] = useState(false);
 
   const bookContentRef = useRef<HTMLDivElement>(null);
-
-  console.log("📚 Book:", bookText);
 
   const handleHover = () => {
     setHover(!hover);
@@ -277,31 +281,31 @@ const Reader = () => {
             </TimerControls>
           </Header>
 
-          <div
-            className={`${showBorderDynamic ? "ai-recommendation" : ""}`}
-            style={{
-              width: zoomWindow ? "50rem" : "29rem",
-              height: zoomWindow ? "20rem" : "17.3rem",
-              position: zoomWindow ? "absolute" : "relative",
-              right: zoomWindow ? "2rem" : "0",
-              bottom: zoomWindow ? "10rem" : "0",
-              background: zoomWindow ? "#070707" : "transparent",
-              color: zoomWindow ? "#3b3b3b" : "#b0b0b0",
-              transition: "all 0.3s ease-in-out",
-              padding: "2rem",
-              borderRadius: "10px",
-              marginTop: "1rem",
-              fontWeight: "bold",
-              overflow: "hidden",
-            }}
+          <AIRecommendationWrapper
+            zoomWindow={zoomWindow}
+            showBorderDynamic={showBorderDynamic}
           >
-            <AIRecommendation
-              showBorderDynamic={showBorderDynamic}
-              setShowBorderDynamic={setShowBorderDynamic}
-              zoomWindow={zoomWindow}
-              setZoomWindow={setZoomWindow}
-            />
-          </div>
+            <AIRecommendationBox>
+              <AIRecommendation
+                showBorderDynamic={showBorderDynamic}
+                setShowBorderDynamic={setShowBorderDynamic}
+                zoomWindow={zoomWindow}
+                setZoomWindow={setZoomWindow}
+              />
+            </AIRecommendationBox>
+
+            {
+              showBorderDynamic && (
+                <IconWrapper>
+              <FaBookBookmark className="icon"/>
+              <FaCopy className="icon"/>
+              <FaFileDownload className="icon"/>
+              <FaShareAlt className="icon"/>
+              <RiUserVoiceFill className="icon"/>
+            </IconWrapper>
+              )
+            }
+          </AIRecommendationWrapper>
         </div>
       </ReaderWrapper>
     </ReaderContainer>

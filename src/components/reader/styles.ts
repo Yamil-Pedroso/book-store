@@ -1,11 +1,16 @@
 import styled, { keyframes } from "styled-components";
 
+interface IProps {
+  zoomWindow: boolean;
+  showBorderDynamic: boolean;
+}
+
 const borderAnimation = keyframes`
-0% { border-color: rgba(100, 149, 237, 1); }   /* Azul pastel */
-  25% { border-color: rgba(186, 85, 211, 1); }   /* Fucsia apagado */
-  50% { border-color: rgba(123, 104, 238, 1); }  /* Azul lavanda */
-  75% { border-color: rgba(219, 112, 147, 1); }  /* Rosa fucsia suave */
-  100% { border-color: rgba(100, 149, 237, 1); } /* Vuelve al Azul pastel */
+0% { border-color: rgba(100, 149, 237, 1); }   
+  25% { border-color: rgba(186, 85, 211, 1); }  
+  50% { border-color: rgba(123, 104, 238, 1); }  
+  75% { border-color: rgba(219, 112, 147, 1); }  
+  100% { border-color: rgba(100, 149, 237, 1); }
 `;
 
 export const ReaderContainer = styled.div`
@@ -26,12 +31,50 @@ export const ReaderContainer = styled.div`
 export const ReaderWrapper = styled.div`
   display: flex;
   position: relative;
+  `;
 
-  .ai-recommendation {
-    border: 1px solid rgba(255, 0, 0, 1);
-    animation: ${borderAnimation} 3s infinite linear;
-    transition: border .6s ease-in-out;
-   
+export const AIRecommendationWrapper = styled.div<IProps>`
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  border-radius: 10px;
+  margin-top: .5rem;
+  font-weight: bold;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  width: ${(props) => (props.zoomWindow ? "50rem" : "29rem")};
+  height: ${(props) => (props.zoomWindow ? "20rem" : "22rem")};
+  position: ${(props) => (props.zoomWindow ? "absolute" : "relative")};
+  right: ${(props) => (props.zoomWindow ? "2rem" : "0")};
+  bottom: ${(props) => (props.zoomWindow ? "10rem" : "0")};
+  background: ${(props) => (props.zoomWindow ? "#070707" : "transparent")};
+  color: ${(props) => (props.zoomWindow ? "#3b3b3b" : "#b0b0b0")};
+  border: ${(props) =>
+    props.showBorderDynamic ? "2px solid #3b3b3b" : "none"};
+  transition: border .6s ease-in-out;
+  animation: ${borderAnimation} 3s infinite linear;
+`;
+
+export const AIRecommendationBox = styled.div`
+  height: 100%;
+  overflow: hidden;
+`;
+
+export const IconWrapper = styled.div`
+  display: flex;
+  gap: 1rem;
+  justify-content: end;
+  margin-top: 2rem;
+
+  .icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #464646;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: #9e9e9e;
+    }
   }
 `;
 
@@ -64,7 +107,7 @@ export const BookContent = styled.div`
   flex-basis: 800px;
   flex-shrink: 0;
   flex-grow: 0;
-  height: 72vh;
+  height: 80vh;
   display: flex;
   justify-content: center;
   background: #1e1e1e;

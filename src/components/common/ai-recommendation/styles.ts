@@ -15,7 +15,7 @@ const zoomInOut = keyframes`
 `;
 
 export const Window = styled.div<{ zoom: boolean }>`
-  width: ${({ zoom }) => (zoom ? "35rem" : "28rem")}; /* Cambia de tamaño */
+  width: ${({ zoom }) => (zoom ? "35rem" : "28rem")};
   height: ${({ zoom }) => (zoom ? "25rem" : "19rem")};
   padding: 0.5rem;
   display: flex;
@@ -26,8 +26,8 @@ export const Window = styled.div<{ zoom: boolean }>`
 
   .zoom-icon-out {
     position: absolute;
-    top: -1.2rem;
-    right: -1.2rem;
+    top: 0rem;
+    right: 0rem;
     cursor: pointer;
     color: #666666;
     z-index: 1;
@@ -35,8 +35,8 @@ export const Window = styled.div<{ zoom: boolean }>`
 
   .zoom-icon-in {
     position: absolute;
-    top: -0.8rem;
-    right: -15rem;
+    top: 0rem;
+    right: -13rem;
     cursor: pointer;
     color: #666666;
     z-index: 1;

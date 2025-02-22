@@ -15,16 +15,18 @@ interface IAIRecommendation {
   setZoomWindow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-
 const IAAnswers = [
   "Valancy Stirling, a 29-year-old woman oppressed by her family, receives a fatal diagnosis and decides to finally live without fear. She rebels against her relatives, moves out to care for Cissy Gay, a shunned young woman, and falls in love with Barney Snaith, a mysterious man with a bad reputation. Believing she has little time left, she proposes to Barney, and they build a happy life together. However, she later discovers that her diagnosis was a mistake and that Barney has a surprising secret.",
   "A structural pattern is a type of design pattern in software engineering that focuses on how classes and objects are composed to form larger structures. It simplifies the design by identifying a simple way to realize relationships between entities. Structural patterns ensure that if one part of a system changes, the entire system does not need to be modified. Examples include the Adapter, Decorator, and Composite patterns, which help in organizing code and objects in a flexible and efficient way.",
   "A behavioral pattern is a type of design pattern in software engineering that focuses on how objects interact with each other. It describes the patterns of communication between objects y cómo colaboran para lograr un objetivo común. Los patrones de comportamiento ayudan a definir la comunicación entre los objetos, haciendo que el sistema sea más flexible y eficiente. Ejemplos incluyen los patrones Observer, Strategy, y Command, que ayudan a definir el comportamiento de los objetos y sus interacciones.",
 ];
 
-const AIRecommendation: React.FC<IAIRecommendation> = ({ showBorderDynamic, setShowBorderDynamic,
-  zoomWindow, setZoomWindow
- }) => {
+const AIRecommendation: React.FC<IAIRecommendation> = ({
+  showBorderDynamic,
+  setShowBorderDynamic,
+  zoomWindow,
+  setZoomWindow,
+}) => {
   const [greetings, setGreetings] = useState("");
   const [textValue, setTextValue] = useState("");
   const [messages, setMessages] = useState<{ sender: string; text: string }[]>(
@@ -40,8 +42,6 @@ const AIRecommendation: React.FC<IAIRecommendation> = ({ showBorderDynamic, setS
   const handleZoomWindow = () => {
     setZoomWindow((prev) => !prev);
   };
-
-  console.log("greets", greetings, "clickedUpArrow", clickedUpArrow);
 
   const handleClickedUpArrow = () => {
     if (textValue.trim()) {
@@ -103,7 +103,7 @@ const AIRecommendation: React.FC<IAIRecommendation> = ({ showBorderDynamic, setS
 
   const simulateTyping = async (responseMessage: string) => {
     setIsTyping(true);
-  setShowBorderDynamic(true);
+    setShowBorderDynamic(true);
     for (let i = 0; i < responseMessage.length; i++) {
       if (shouldStopTyping.current) {
         // Si shouldStopTyping es true, detén la escritura y regresa el control
@@ -126,7 +126,7 @@ const AIRecommendation: React.FC<IAIRecommendation> = ({ showBorderDynamic, setS
 
   const handleKeyPress = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && textValue.trim() && !shouldStopTyping.current) {
-       setShowBorderDynamic(false);
+      setShowBorderDynamic(false);
       // Agregar el mensaje del usuario
       setMessages((prevMessages) => [
         ...prevMessages,
@@ -171,29 +171,25 @@ const AIRecommendation: React.FC<IAIRecommendation> = ({ showBorderDynamic, setS
             ]);
           }
         }
-
       }, 5000);
       setTextValue("");
     }
   };
 
   return (
-    <div
-    >
+    <div>
       <Window zoom={zoomWindow}>
-        {
-           zoomWindow ? (
-            <MdOutlineZoomInMap
-              onClick={handleZoomWindow}
-              className="zoom-icon-in"
-            />
-          ) : (
-            <MdOutlineZoomOutMap
-              onClick={handleZoomWindow}
-              className="zoom-icon-out"
-            />
-          )
-        }
+        {zoomWindow ? (
+          <MdOutlineZoomInMap
+            onClick={handleZoomWindow}
+            className="zoom-icon-in"
+          />
+        ) : (
+          <MdOutlineZoomOutMap
+            onClick={handleZoomWindow}
+            className="zoom-icon-out"
+          />
+        )}
         <InputContainer>
           <InputField
             value={textValue}
@@ -213,9 +209,7 @@ const AIRecommendation: React.FC<IAIRecommendation> = ({ showBorderDynamic, setS
             />
           )}
         </InputContainer>
-        <MessageContent
-         style={{ width: zoomWindow ? "47rem" : "" }}
-        >
+        <MessageContent style={{ width: zoomWindow ? "47rem" : "" }}>
           {messages.map((message, index) => (
             <div key={index} className="sms-sender">
               <div className="avatar">
@@ -224,8 +218,7 @@ const AIRecommendation: React.FC<IAIRecommendation> = ({ showBorderDynamic, setS
                 )}
               </div>
 
-              <span
-              >{message.text}</span>
+              <span>{message.text}</span>
             </div>
           ))}
         </MessageContent>
